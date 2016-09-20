@@ -264,3 +264,6 @@ paket-files/
 __pycache__/
 *.pyc
 0Suchvorgang...
+
+# TypeScript typings
+typings/
