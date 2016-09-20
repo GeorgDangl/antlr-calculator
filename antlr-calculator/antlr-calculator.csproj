@@ -32,6 +32,7 @@
     <Content Include="GeneratedAntlr\CalculatorLexer.js" />
     <Content Include="GeneratedAntlr\CalculatorParser.js" />
     <Content Include="GeneratedAntlr\CalculatorVisitor.js" />
+    <Content Include="index.js" />
     <Content Include="systemjs.config.js" />
     <Content Include="webpack.config.antlr.js" />
     <Content Include="webpack.config.js" />
