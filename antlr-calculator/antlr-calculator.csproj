@@ -22,6 +22,10 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CalculationResult.js" />
+    <Content Include="Calculator.js" />
+    <Content Include="FormulaErrorListener.js" />
+    <Content Include="FormulaVisitor.js" />
     <Content Include="GeneratedAntlr\CalculatorLexer.js" />
     <Content Include="GeneratedAntlr\CalculatorParser.js" />
     <Content Include="GeneratedAntlr\CalculatorVisitor.js" />
@@ -30,6 +34,10 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="antlr4.d.ts" />
+    <TypeScriptCompile Include="CalculationResult.ts" />
+    <TypeScriptCompile Include="Calculator.ts" />
+    <TypeScriptCompile Include="FormulaErrorListener.ts" />
+    <TypeScriptCompile Include="FormulaVisitor.ts" />
     <TypeScriptCompile Include="GeneratedAntlr\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\jasmine\index.d.ts" />
     <TypeScriptCompile Include="typings\index.d.ts" />
@@ -39,6 +47,7 @@
     <Content Include="typings.json" />
     <Content Include="typings\globals\jasmine\typings.json" />
     <Content Include="tsconfig.json" />
+    <Content Include="CalculationResult.js.map" />
     <None Include="Calculator.g4">
       <Generator>MSBuild:Compile</Generator>
       <CustomToolNamespace>antlr_calculator</CustomToolNamespace>
@@ -51,6 +60,9 @@
       <Generator>MSBuild:Compile</Generator>
       <CustomToolNamespace>antlr_calculator.GeneratedAntlr</CustomToolNamespace>
     </AntlrTokens>
+    <Content Include="Calculator.js.map" />
+    <Content Include="FormulaErrorListener.js.map" />
+    <Content Include="FormulaVisitor.js.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
