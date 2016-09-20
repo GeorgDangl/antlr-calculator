@@ -22,12 +22,12 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app.css" />
-    <Content Include="index.html" />
-    <Content Include="web.config" />
+    <Content Include="GeneratedAntlr\CalculatorLexer.js" />
+    <Content Include="GeneratedAntlr\CalculatorParser.js" />
+    <Content Include="GeneratedAntlr\CalculatorVisitor.js" />
+    <Content Include="webpack.config.antlr.js" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="typings\globals\jasmine\index.d.ts" />
     <TypeScriptCompile Include="typings\index.d.ts" />
   </ItemGroup>
@@ -35,12 +35,19 @@
     <Content Include="package.json" />
     <Content Include="typings.json" />
     <Content Include="typings\globals\jasmine\typings.json" />
-    <None Include="web.Debug.config">
-      <DependentUpon>web.config</DependentUpon>
+    <Content Include="tsconfig.json" />
+    <None Include="Calculator.g4">
+      <Generator>MSBuild:Compile</Generator>
+      <CustomToolNamespace>antlr_calculator</CustomToolNamespace>
     </None>
-    <None Include="web.Release.config">
-      <DependentUpon>web.config</DependentUpon>
-    </None>
+    <AntlrTokens Include="GeneratedAntlr\Calculator.tokens">
+      <Generator>MSBuild:Compile</Generator>
+      <CustomToolNamespace>antlr_calculator.GeneratedAntlr</CustomToolNamespace>
+    </AntlrTokens>
+    <AntlrTokens Include="GeneratedAntlr\CalculatorLexer.tokens">
+      <Generator>MSBuild:Compile</Generator>
+      <CustomToolNamespace>antlr_calculator.GeneratedAntlr</CustomToolNamespace>
+    </AntlrTokens>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
