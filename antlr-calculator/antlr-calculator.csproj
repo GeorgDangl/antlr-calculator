@@ -20,6 +20,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="CalculationResult.js" />
@@ -30,11 +31,13 @@
     <Content Include="GeneratedAntlr\CalculatorParser.js" />
     <Content Include="GeneratedAntlr\CalculatorVisitor.js" />
     <Content Include="GeneratedAntlr\index.js" />
+    <Content Include="systemjs.config.js" />
     <Content Include="webpack.config.antlr.js" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="antlr4.d.ts" />
     <TypeScriptCompile Include="CalculationResult.ts" />
+    <TypeScriptCompile Include="Calculator.spec.ts" />
     <TypeScriptCompile Include="Calculator.ts" />
     <TypeScriptCompile Include="FormulaErrorListener.ts" />
     <TypeScriptCompile Include="FormulaVisitor.ts" />
@@ -63,6 +66,7 @@
     <Content Include="Calculator.js.map" />
     <Content Include="FormulaErrorListener.js.map" />
     <Content Include="FormulaVisitor.js.map" />
+    <Content Include="chutzpah.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
