@@ -41,6 +41,7 @@
     <TypeScriptCompile Include="Calculator.spec.ts" />
     <TypeScriptCompile Include="Calculator.ts" />
     <TypeScriptCompile Include="FormulaErrorListener.ts" />
+    <TypeScriptCompile Include="index.d.ts" />
     <TypeScriptCompile Include="typings\globals\jasmine\index.d.ts" />
     <TypeScriptCompile Include="typings\index.d.ts" />
   </ItemGroup>
