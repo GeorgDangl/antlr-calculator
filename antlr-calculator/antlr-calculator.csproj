@@ -25,9 +25,12 @@
     <Content Include="GeneratedAntlr\CalculatorLexer.js" />
     <Content Include="GeneratedAntlr\CalculatorParser.js" />
     <Content Include="GeneratedAntlr\CalculatorVisitor.js" />
+    <Content Include="GeneratedAntlr\index.js" />
     <Content Include="webpack.config.antlr.js" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="antlr4.d.ts" />
+    <TypeScriptCompile Include="GeneratedAntlr\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\jasmine\index.d.ts" />
     <TypeScriptCompile Include="typings\index.d.ts" />
   </ItemGroup>
