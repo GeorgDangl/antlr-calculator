@@ -1,12 +1,10 @@
 "use strict";
 var CalculationResult_1 = require('./CalculationResult');
 var FormulaErrorListener_1 = require('./FormulaErrorListener');
-//import { InputStream, CommonTokenStream } from 'antlr4';
 var antlr4 = require('antlr4');
 var calculatorLexer = require('./GeneratedAntlr/CalculatorLexer');
 var calculatorParser = require('./GeneratedAntlr/CalculatorParser');
 var formulaVisitor = require('./FormulaVisitor.js');
-//import { CalculatorLexer, CalculatorParser } from './GeneratedAntlr';
 var Calculator = (function () {
     function Calculator() {
     }
