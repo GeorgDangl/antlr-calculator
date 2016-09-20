@@ -25,6 +25,7 @@
   <ItemGroup>
     <Content Include="CalculationResult.js" />
     <Content Include="Calculator.js" />
+    <Content Include="dist\bundle.js" />
     <Content Include="FormulaErrorListener.js" />
     <Content Include="FormulaVisitor.js" />
     <Content Include="GeneratedAntlr\CalculatorLexer.js" />
@@ -33,6 +34,7 @@
     <Content Include="GeneratedAntlr\index.js" />
     <Content Include="systemjs.config.js" />
     <Content Include="webpack.config.antlr.js" />
+    <Content Include="webpack.config.js" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="antlr4.d.ts" />
@@ -67,6 +69,7 @@
     <Content Include="FormulaErrorListener.js.map" />
     <Content Include="FormulaVisitor.js.map" />
     <Content Include="chutzpah.json" />
+    <Content Include="dist\bundle.js.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
