@@ -4,7 +4,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var GeneratedAntlr_1 = require('./GeneratedAntlr');
+var calculatorVisitor = require('./GeneratedAntlr/CalculatorVisitor.js');
 // This class defines a complete visitor for a parse tree produced by the CalculatorParser.
 var FormulaVisitor = (function (_super) {
     __extends(FormulaVisitor, _super);
@@ -236,6 +236,5 @@ var FormulaVisitor = (function (_super) {
     };
     ;
     return FormulaVisitor;
-}(GeneratedAntlr_1.CalculatorVisitor));
+}(calculatorVisitor.CalculatorVisitor));
 exports.FormulaVisitor = FormulaVisitor;
-//# sourceMappingURL=FormulaVisitor.js.map
