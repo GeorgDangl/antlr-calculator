@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "scripts": {
     "postinstall": "typings install",
-    "build": "webpack:antlr && webpack",
+    "build": "tsc && npm run webpack:antlr && npm run webpack",
     "webpack": "webpack",
-    "webpack:antlr": "webpack --config webpack.config.antlr.js"
+    "webpack:antlr": "webpack --config webpack.config.antlr.js",
+    "tsc": "tsc" 
   },
   "devDependencies": {
     "antlr4": "^4.5.2",
