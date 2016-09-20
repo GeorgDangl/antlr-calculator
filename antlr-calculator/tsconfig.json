@@ -7,7 +7,7 @@
     "target": "es5",
     "lib": [ "es5", "dom", "es2015.core" ],
     "moduleResolution": "node",
-    "module": "amd"
+    "module": "commonjs"
   },
   "compileOnSave": false,
   "exclude": [
