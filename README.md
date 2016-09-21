@@ -10,12 +10,12 @@ is gzipped just a bit over 50&nbsp;kb.
 
 Whenever a calculation is performed, a `CalculationResult` is returned with the following properties:
 
-|Property|Type||
-|-|-|-|
-|isValid|boolean| `true` if the formula could be parsed and calculated, else `false` |
-|errorPosition|number| Position of the offending symbol in the line, 0 based index, for invalid results, else null |
-|errorMessage|string| ANTLR error message for invalid formulas, else null |
-|result|number| `NaN` for invalid formulas, else the actual result |
+| Property      | Type    |                                                                                             |
+|---------------|---------|---------------------------------------------------------------------------------------------|
+| isValid       | boolean | `true` if the formula could be parsed and calculated, else `false`                          |
+| errorPosition | number  | Position of the offending symbol in the line, 0 based index, for invalid results, else null |
+| errorMessage  | string  | ANTLR error message for invalid formulas, else null                                         |
+| result        | number  | `NaN` for invalid formulas, else the actual result                                          |
 
 Since this is mostly a learning project, expect bugs😉
 
