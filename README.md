@@ -140,4 +140,4 @@ Comments in Formulas are supported by encapsulating them either in `/*...*/`, `'
 
 ---
 
-[MIT Licence](Licence.md)
+[MIT License](License.md)
