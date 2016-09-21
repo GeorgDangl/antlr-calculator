@@ -62,9 +62,9 @@ the `fs` module cannot be resolved. When running in the browser, it's safe to ig
 ### Ignore `fs` module in webpack
 Add the following to your `webpack.config`:
 
-``` json
+``` javascript
 node: {
-  fs: "empty"
+  fs: 'empty'
 }
 ```
 
