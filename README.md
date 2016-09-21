@@ -17,6 +17,9 @@ Whenever a calculation is performed, a `CalculationResult` is returned with the 
 | errorMessage  | string  | ANTLR error message for invalid formulas, else null                                         |
 | result        | number  | `NaN` for invalid formulas, else the actual result                                          |
 
+Unit tests are performed using [Chutzpah](https://github.com/mmanela/chutzpah)
+(via console in CI and with the Visual Studio extension while developing).
+
 Since this is mostly a learning project, expect bugs😉
 
 ## JavaScript
