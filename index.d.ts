@@ -1,1 +1,2 @@
-﻿export * from './antlr-calculator';
+﻿export * from './Calculator';
+export * from './CalculationResult';
