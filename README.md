@@ -1,5 +1,6 @@
 ﻿# antlr-calculator
-[![Build Status](https://jenkins.dan.gl/buildStatus/icon?job=antlr-calculator)](https://jenkins.dan.gl/job/antlr-calculator)
+
+[![Build Status](https://jenkins.dan.gl/buildStatus/icon?job=antlr-calculator%20-%20Tests)](https://jenkins.dan.gl/job/antlr-calculator%20-%20Tests)
 
 This calculator is using the [ANTLR4 JavaScript target](https://github.com/antlr/antlr4/blob/master/doc/javascript-target.md)
 to calculate results from formulas that are passed in as string. Both JavaScript and TypeScript is supported.
