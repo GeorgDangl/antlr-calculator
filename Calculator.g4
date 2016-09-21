@@ -28,18 +28,18 @@ expression	:	FLOOR  expression 									#Floor			//	Round down to zero accuracy
 			|	ROUNDK '(' expression ';' expression ')'			#Roundk			//	Round expr_1 with expr_2 accuracy
 			|	ROUND  expression 									#Round			//	Round with zero accuracy
 			|	TRUNC  expression 									#Trunc			//	Trim decimal digits
-			|	SIN  expression 									#Sin			//	
-			|	COS  expression 									#Cos			//	
-			|	TAN  expression 									#Tan			//	
-			|	COT  expression										#Cot			//	
-			|	SINH  expression 									#Sinh			//	
-			|	COSH  expression 									#Cosh			//	
-			|	TANH  expression 									#Tanh			//	
-			|	ARCSIN  expression 									#Arcsin			//	
-			|	ARCCOS  expression 									#Arccos			//	
-			|	ARCTAN  expression 									#Arctan			//	
-			|	ARCTAN2 '(' expression ';' expression ')'			#Arctan2		//	
-			|	ARCCOT  expression 									#Arccot			//	
+			|	SIN  expression 									#Sin			//	Sinus
+			|	COS  expression 									#Cos			//	Cosinus
+			|	TAN  expression 									#Tan			//	Tangens
+			|	COT  expression										#Cot			//	Cotangens	
+			|	SINH  expression 									#Sinh			//	Sinus Hypererbolicus
+			|	COSH  expression 									#Cosh			//	Cosinus Hyperbolicus
+			|	TANH  expression 									#Tanh			//	Tangens Hyperbolicus
+			|	ARCSIN  expression 									#Arcsin			//	Inverse Sinus
+			|	ARCCOS  expression 									#Arccos			//	Inverse Cosinus
+			|	ARCTAN  expression 									#Arctan			//	Inverse Tangens
+			|	ARCTAN2 '(' expression ';' expression ')'			#Arctan2		//	Atan2
+			|	ARCCOT  expression 									#Arccot			//	Inverse Cotangens
 			|	EXP  expression 									#Exp			//	e ^ expr
 			|	LN  expression 										#Ln				//	Logarithm to e
 			|	EEX  expression 									#Eex			//	10 ^ expr
@@ -49,7 +49,7 @@ expression	:	FLOOR  expression 									#Floor			//	Round down to zero accuracy
 			|	SQRT expression 									#Sqrt			//	Square root
 			|	SQR expression 										#Sqr			//	Square product
 			|	expression op = ('^'|'**') expression				#Pow			//	expr_1 to the expr_2 th power
-			|	expression (MOD | '%' ) expression					#Mod			//	
+			|	expression (MOD | '%' ) expression					#Mod			//	Modulo
 			|	expression WHOLE expression							#Whole			//	Whole part of division rest
 			|	expression op = ('~'|'//') expression				#SqRoot			//	expr_1 nth root of expr_2
 			|	expression op = ('*'|'/') expression				#MulDiv			//	Multiplication or division
