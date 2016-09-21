@@ -14,7 +14,7 @@
         function calculate() {
             var formula = document.getElementById('formulaInput').value;
             var result = antlrCalc.Calculator.calculate(formula);
-            document.getElementById('resultHeading').innerText = 'Result:' + result.result;
+            document.getElementById('resultHeading').innerText = 'Result: ' + result.result;
             document.getElementById('resultJson').innerText = JSON.stringify(result, null, 2);
             if (!result.isValid) {
                 document.getElementById('correctPart').innerText = formula.substring(0, result.errorPosition);
