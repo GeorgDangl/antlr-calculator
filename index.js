@@ -1,2 +1,2 @@
-exports.Calculator = require('./Calculator');
-exports.CalculationResult = require('./CalculationResult');
+exports.Calculator = require('./Calculator').Calculator;
+exports.CalculationResult = require('./CalculationResult').CalculationResult;
