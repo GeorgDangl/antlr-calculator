@@ -280,6 +280,8 @@ describe('Calculator',
                     }
                 });
 
+                it('Floor without parentheses', () => { expectations = { formula: 'floor3.4', expectedResult: 3 } });
+
                 it('Calc_Spaces_01', () => { expectations = { formula: ' 0', expectedResult: 0 }; });
 
                 it('Calc_Spaces_02', () => { expectations = { formula: '0 ', expectedResult: 0 }; });

@@ -180,6 +180,7 @@ describe('Calculator', function () {
                 expect(calculationResult.result).toBeCloseTo(expectations.expectedResult, 1);
             }
         });
+        it('Floor without parentheses', function () { expectations = { formula: 'floor3.4', expectedResult: 3 }; });
         it('Calc_Spaces_01', function () { expectations = { formula: ' 0', expectedResult: 0 }; });
         it('Calc_Spaces_02', function () { expectations = { formula: '0 ', expectedResult: 0 }; });
         it('Calc_Spaces_03', function () { expectations = { formula: ' 0 ', expectedResult: 0 }; });
