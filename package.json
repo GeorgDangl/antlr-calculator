@@ -6,10 +6,12 @@
     "build": "tsc && npm run webpack:antlr && npm run webpack",
     "webpack": "webpack",
     "webpack:antlr": "webpack --config webpack.config.antlr.js",
-    "tsc": "tsc" 
+    "tsc": "tsc"
+  },
+  "dependencies": {
+    "antlr4": "^4.5.2"
   },
   "devDependencies": {
-    "antlr4": "^4.5.2",
     "antlr4-webpack-plugin": "^0.0.1",
     "webpack": "^1.12.13",
     "webpack-dev-server": "1.15.1",
