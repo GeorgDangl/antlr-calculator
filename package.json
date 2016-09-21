@@ -1,6 +1,11 @@
 {
   "name": "antlr-calculator",
   "version": "1.0.2",
+  "license": "MIT",
+  "repository" : { 
+    "type" : "git",
+	"url" : "https://github.com/GeorgDangl/antlr-calculator.git"
+  },
   "scripts": {
     "postinstall": "typings install",
     "build": "tsc && npm run webpack:antlr && npm run webpack",
