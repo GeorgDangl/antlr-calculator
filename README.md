@@ -25,6 +25,10 @@ Since this is mostly a learning project, expect bugs😉
 
 [You can check out the live demo here!](http://antlr-calculator.dangl.me)
 
+## Installation
+
+Clone this repository or just go with `npm install antlr-calculator`.
+
 ## JavaScript
 
 Just reference `dist/bundle.js` and the global variable `antlrCalc` is available.
