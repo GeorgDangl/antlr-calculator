@@ -7,8 +7,7 @@
 	"url" : "https://github.com/GeorgDangl/antlr-calculator.git"
   },
   "scripts": {
-    "postinstall": "typings install",
-    "build": "tsc && npm run webpack:antlr && npm run webpack",
+    "build": "typings install && tsc && npm run webpack:antlr && npm run webpack",
     "webpack": "webpack",
     "webpack:antlr": "webpack --config webpack.config.antlr.js",
     "tsc": "tsc"
