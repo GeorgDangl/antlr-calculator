@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>antlr-calculator Demo</title>
+    <meta charset="utf-8" />
+    <script type="text/javascript" src="dist/bundle.js"></script>
+    <script type="text/javascript">
+        function calculate() {
+            var formula = document.getElementById('formulaInput').value;
+            var result = antlrCalc.Calculator.calculate(formula);
+            document.getElementById('resultHeading').innerText = 'Result:' + result.result;
+            document.getElementById('resultJson').innerText = JSON.stringify(result, null, 2);
+            if (!result.isValid) {
+                document.getElementById('correctPart').innerText = formula.substring(0, result.errorPosition);
+                document.getElementById('invalidPart').innerText = formula.substring(result.errorPosition);
+            } else {
+                document.getElementById('correctPart').innerText = null;
+                document.getElementById('invalidPart').innerText = null;
+            }
+            console.log("Calculated result:");
+            console.log(result);
+        }
+    </script>
+</head>
+<body>
+    <h1>antlr-calculator Demo</h1>
+    <p>Enter your formula here:</p>
+<input type="text" id="formulaInput" onkeyup="calculate()" />
+    <br />
+    <br />
+    <span id="correctPart"></span><span style="background:red;" id="invalidPart"></span>
+    <h3 id="resultHeading">Result: </h3>
+<pre id="resultJson"></pre>
+</body>
+</html>
