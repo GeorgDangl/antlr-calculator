@@ -71,7 +71,7 @@
     <Content Include="dist\bundle.js.map" />
     <Content Include="Calculator.spec.js.map" />
     <Content Include="README.md" />
-    <Content Include="LICENCE.md" />
+    <Content Include="LICENSE.md" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
