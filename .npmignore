@@ -10,6 +10,7 @@ obj/
 *.spec.ts
 chutzpah.json
 index.html
+favicon.png
 tsconfig.json
 systemjs.config.js
 webpack.config.antlr.js
