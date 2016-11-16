@@ -34,6 +34,7 @@
     <Content Include="GeneratedAntlr\CalculatorVisitor.js" />
     <Content Include="index.html" />
     <Content Include="index.js" />
+    <None Include="Jenkinsfile" />
     <Content Include="systemjs.config.js" />
     <Content Include="webpack.config.antlr.js" />
     <Content Include="webpack.config.js" />

@@ -15,5 +15,6 @@ tsconfig.json
 systemjs.config.js
 webpack.config.antlr.js
 webpack.config.js
+Jenkinsfile
 *.js.map
 *.tokens
