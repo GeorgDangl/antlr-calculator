@@ -1,4 +1,4 @@
-﻿node{
+node{
     stage ('Build') {
         git 'https://github.com/GeorgDangl/antlr-calculator.git'
         bat 'npm install'
