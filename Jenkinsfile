@@ -4,7 +4,7 @@ node{
         bat 'npm install'
     }
     stage ('Test') {
-        bat '"C:\\Buildtools\\Chutzpah\\4.2.4\\chutzpah.console.exe" "%WORKSPACE%/chutzpah.json" /nunit2 typeScriptTestResults.xml'
+        bat '"C:\\Tools\\Chutzpah\\4.2.4\\chutzpah.console.exe" "%WORKSPACE%/chutzpah.json" /nunit2 typeScriptTestResults.xml'
         step(
             [
                 $class: 'XUnitBuilder',
