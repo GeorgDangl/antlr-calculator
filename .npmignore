@@ -18,3 +18,4 @@ webpack.config.js
 Jenkinsfile
 *.js.map
 *.tokens
+Web.config
