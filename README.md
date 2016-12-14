@@ -23,7 +23,7 @@ Unit tests are performed using [Chutzpah](https://github.com/mmanela/chutzpah)
 
 Since this is mostly a learning project, expect bugs😉
 
-[You can check out the live demo here!](http://antlr-calculator.dangl.me)
+[You can check out the live demo here!](https://antlr-calculator.dangl.me)
 
 ## Installation
 
