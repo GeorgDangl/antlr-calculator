@@ -1,6 +1,7 @@
 "use strict";
-var CalculationResult_1 = require('./CalculationResult');
-var FormulaErrorListener_1 = require('./FormulaErrorListener');
+Object.defineProperty(exports, "__esModule", { value: true });
+var CalculationResult_1 = require("./CalculationResult");
+var FormulaErrorListener_1 = require("./FormulaErrorListener");
 var antlr4 = require('antlr4');
 var calculatorLexer = require('./GeneratedAntlr/CalculatorLexer');
 var calculatorParser = require('./GeneratedAntlr/CalculatorParser');

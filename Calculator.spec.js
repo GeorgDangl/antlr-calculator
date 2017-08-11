@@ -1,5 +1,6 @@
 "use strict";
-var Calculator_1 = require('./Calculator');
+Object.defineProperty(exports, "__esModule", { value: true });
+var Calculator_1 = require("./Calculator");
 describe('Calculator', function () {
     describe('with expression:', function () {
         var expectations;

@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var FormulaErrorListener = (function () {
     function FormulaErrorListener() {
         this._isValid = true;
