@@ -1,16 +1,23 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>antlr-calculator Demo</title>
-	<link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="/favicon.png">
     <meta charset="utf-8" />
-	<meta name="google-site-verification" content="bTSDGbkQIvxykjKDXuotRKWw1pP8U2W_XH6Kyo_gYQo" />
+    <meta name="google-site-verification" content="bTSDGbkQIvxykjKDXuotRKWw1pP8U2W_XH6Kyo_gYQo" />
     <!-- Fork me on GitHub Stylesheet, see  https://github.com/simonwhitaker/github-fork-ribbon-css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.min.css" />
     <!--[if lt IE 9]>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.ie.min.css" />
     <![endif]-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700|Indie+Flower:400|">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="/css/plugins.min.css" />
+    <link rel="stylesheet" href="/css/style.cyan-600.min.css" />
+    <link rel="stylesheet" href="/css/custom-styles.css" />
+    <link rel="stylesheet" href="/css/custom-menu.css" />
     <script type="text/javascript" src="dist/bundle.js"></script>
     <script type="text/javascript">
         function calculate() {
@@ -30,19 +37,107 @@
         }
     </script>
 </head>
+
 <body>
-    <h1>antlr-calculator Demo</h1>
-    <p>Enter your formula here:</p>
-<input type="text" id="formulaInput" onkeyup="calculate()" />
-    <br />
-    <br />
-    <span id="correctPart"></span><span style="background:red;" id="invalidPart"></span>
-    <h3 id="resultHeading">Result: </h3>
-	<pre id="resultJson"></pre>
-	<hr />
-	<a href="https://www.dangl-it.com">&copy; Georg Dangl</a>
-	-
-	<a href="https://blog.dangl.me">Blog</a>
-    <a class="github-fork-ribbon" href="https://github.com/GeorgDangl/antlr-calculator" title="Fork me on GitHub">Fork me on GitHub</a>
+    <div class="ms-site-container">
+
+        <header class="ms-header ms-header-primary">
+            <div class="container container-full">
+                <div class="ms-title">
+                    <a href="/">
+                        <span class="ms-logo">GD</span>
+                        <h1>
+                            antlr-<span>calculator</span>-demo
+                        </h1>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <nav class="navbar navbar-expand-md navbar-static ms-navbar ms-navbar-dark">
+            <div class="container container-full">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">
+                        <span class="ms-logo ms-logo-sm">GD</span>
+                        <span class="ms-title">
+                            antlr-<strong>calculator</strong>-demo
+                        </span>
+                    </a>
+                </div>
+                <div id="ms-navbar" class="navbar-collapse collapse">
+                    <ul class="nav mr-auto navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/">
+                                Home
+                                <div></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://github.com/GeorgDangl/antlr-calculator">
+                                GitHub
+                                <div></div>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" style="position:relative;" href="https://blog.dangl.me">
+                                Blog
+                                <div></div>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" style="position:relative;" href="https://www.dangl-it.com">
+                                Dangl<strong>IT</strong>
+                                <div></div>
+                            </a>
+                        </li>
+                    </ul>
+                    <div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container body-content" style="flex: 1 0 auto;">
+            <h1>antlr-calculator-demo</h1>
+            <p>Enter your formula here:</p>
+            <div>
+                <input type="text" class="form-control" placeholder="Formula, e.g. 2+2" id="formulaInput" onkeyup="calculate()" />
+            </div>
+            <span id="correctPart"></span><span style="background:red;" id="invalidPart"></span>
+            <h3 id="resultHeading">Result: </h3>
+            <pre id="resultJson" class="mb-4"></pre>
+        </div>
+
+        <footer class="ms-footer">
+            <div class="container">
+                <p class="d-block d-sm-none">
+                </p>
+                <div class="row d-block d-sm-none">
+                    <div class="col-md-6 d-block d-sm-none">
+                        <span class="ms-logo">GD</span> Georg Dangl ©
+                        2016 - 2019
+                    </div>
+                    <div class="col-md-6 d-block d-sm-none">
+                        <a href="https://blog.dangl.me">
+                            Dangl.Blog();
+                        </a>
+                    </div>
+                </div>
+                <p></p>
+                <p class="d-none d-sm-block">
+                    <span class="ms-logo">GD</span>
+                    Georg Dangl © 2016 - 2019
+                    - <a href="https://blog.dangl.me">
+                        Dangl.Blog();
+                    </a>
+                </p>
+            </div>
+        </footer>
+
+    </div>
+    <a class="github-fork-ribbon" href="https://github.com/GeorgDangl/antlr-calculator" title="Fork me on GitHub">Fork
+        me on GitHub</a>
+    <script src="/js/plugins.min.js"></script>
+    <script src="/js/app.min.js"></script>
 </body>
 </html>

@@ -19,3 +19,7 @@ Jenkinsfile
 *.js.map
 *.tokens
 Web.config
+css/
+fonts/
+img/
+js/

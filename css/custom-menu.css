@@ -1,0 +1,49 @@
+﻿
+
+/* Below is to have nav menu use primary color instead of white */
+.ms-navbar .navbar-collapse .navbar-nav .nav-item > a:before, .ms-lead-navbar .navbar-collapse .navbar-nav .nav-item > a:before {
+    background-color: #00acc1;
+}
+
+.ms-navbar .navbar-collapse .navbar-nav .nav-item a:hover,
+.ms-navbar .navbar-collapse .navbar-nav .nav-item.active a:hover,
+.ms-navbar .navbar-collapse .navbar-nav .nav-item.dropdown.show a,
+.ms-navbar .navbar-collapse .navbar-nav .nav-item.dropdown.show a:hover,
+.ms-navbar .navbar-collapse .navbar-nav .nav-item.dropdown.show.active a:hover,
+.ms-navbar .navbar-collapse .navbar-nav .nav-item a:focus,
+.ms-navbar .navbar-collapse .navbar-nav .nav-item.active a:focus,
+.ms-navbar .navbar-collapse .navbar-nav .nav-item.dropdown.show a:focus,
+.ms-navbar .navbar-collapse .navbar-nav .nav-item.dropdown.show.active a:focus {
+    color: #fff;
+}
+
+.ms-navbar .navbar-collapse .navbar-nav .nav-item.dropdown .dropdown-menu {
+    background-color: #424242;
+    color: #fff;
+}
+
+.ms-navbar .navbar-collapse .navbar-nav .nav-item.dropdown .dropdown-menu li .dropdown-item,
+.ms-navbar .navbar-collapse .navbar-nav .nav-item.dropdown .dropdown-menu li .dropdown-item:focus,
+.ms-navbar .navbar-collapse .navbar-nav .nav-item.dropdown .dropdown-menu li .dropdown-item:hover {
+    background-color: #424242;
+    color: #fff;
+}
+
+.ms-navbar .navbar-collapse .navbar-nav .nav-item.dropdown .dropdown-menu li.active .dropdown-item
+{
+    background-color: #00acc1;
+    color: #fff;
+}
+
+.ms-navbar .navbar-collapse .navbar-nav .nav-item.dropdown .dropdown-menu li .dropdown-item:hover,
+.ms-navbar .navbar-collapse .navbar-nav .nav-item.dropdown .dropdown-menu li .dropdown-item:focus,
+.ms-lead-navbar .navbar-collapse .navbar-nav .nav-item.dropdown .dropdown-menu li .dropdown-item:hover,
+.ms-lead-navbar .navbar-collapse .navbar-nav .nav-item.dropdown .dropdown-menu li .dropdown-item:focus {
+    background-color: #00acc1;
+    color: #fff;
+}
+
+.ms-navbar .navbar-nav li.active > a, .ms-navbar .navbar-nav li.active > a:hover, .ms-navbar .navbar-nav li.active > a {
+    background-color: #00acc1;
+    color: #fff;
+}

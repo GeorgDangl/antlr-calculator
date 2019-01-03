@@ -1,0 +1,142 @@
+﻿.ms-slidebar .ms-slidebar-header {
+    background-image: url(../img/abstract.jpg);
+    background-size: cover;
+}
+
+.menu-flag {
+    height: 40px;
+    padding: 10px 0;
+}
+
+.slidenav-flag {
+    max-height: 25px;
+}
+
+.two_cols {
+    width: 100%;
+    overflow: hidden;
+    font-size: large;
+}
+.two_cols li {
+    float: left;
+    width: 50%;
+    margin-bottom: 2rem;
+}
+.two_cols li a {
+    display: block;
+    padding: 2px 0;
+}
+.two_cols li a i {
+    margin-right: 10px;
+    width: 15px;
+    text-align: center;
+    color: #00acc1;
+}
+.two_cols li a:hover i {
+    transition: all ease 0.5s;
+    color: #ffa726;
+    transform: rotateY(360deg);
+}
+
+.post-preview-image {
+    max-width: 75px;
+    max-height: 75px;
+}
+
+.ms-footer-media .media {
+    margin-bottom: 0;   
+}
+
+.contact-social-media a {
+    margin: 0 5px;
+}
+
+.ms-footer .ms-logo {
+    margin-right: 0.5rem;
+    transform: scale(0.8);
+}
+
+.ms-hero-bg-dark-light .card {
+    color: #757575;
+}
+
+.break-word-wrap {
+    word-wrap: break-word;
+}
+
+.product-description img {
+    max-width: 100%;
+}
+
+.no-line-break {
+    white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+    .no-line-break {
+        font-size: 24px;
+    }
+}
+
+.same-icon-width i {
+    min-width: 13px;
+}
+
+.text-left {
+    text-align: left;   
+}
+
+.full-height-thumbnail {
+    height:100%;
+}
+
+.full-height {
+    height: 100%;
+}
+
+.full-width-card {
+    width: 100%;
+}
+
+@media (min-width: 1024px) {
+    .container {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
+.no-border {
+    border: none;
+}
+
+.article-body img {
+    max-width: 100%;
+}
+
+.customer-review-carousel-inner {
+    padding: 0 20px;
+}
+
+@media (max-width: 480px) {
+    .card blockquote.blockquote.blockquote-avatar {
+        padding: 1rem;
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 1199px) {
+    .ms-navbar.navbar .container .navbar-collapse .navbar-nav .nav-item a {
+        padding: 0 14px;
+    }
+}
+
+@media (max-width: 992px) {
+    .ms-navbar.navbar .container .navbar-collapse .navbar-nav .nav-item a {
+        padding: 0 8px;
+    }
+}
+
+.btn:disabled,
+.btn[disabled][disabled] {
+    background-color: #00acc1;
+}
