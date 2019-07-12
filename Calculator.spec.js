@@ -154,6 +154,9 @@ describe('Calculator', function () {
         it('UnaryPlus', function () {
             expectations = { formula: '+3', expectedResult: 3 };
         });
+        it('Multiplication without sign', function () {
+            expectations = { formula: '2(3)', expectedResult: 6 };
+        });
     });
     describe('with correct formulas:', function () {
         var expectations;
