@@ -250,6 +250,11 @@ describe('Calculator',
                     () => {
                         expectations = { formula: '+3', expectedResult: 3 }
                     });
+
+                it('Multiplication without sign',
+                    () => {
+                        expectations = { formula: '2(3)', expectedResult: 6 }
+                    });
             });
 
         describe('with correct formulas:',
