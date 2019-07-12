@@ -1,4 +1,4 @@
-﻿// **************************************
+// **************************************
 // *                                    *
 // *  Grammar for calculating           *
 // *  formulas.                         *
@@ -12,27 +12,6 @@
 // **************************************
     
 grammar Calculator;
-
-@parser::members
-{
-    protected const int EOF = Eof;
-}
-
-@lexer::members
-{
-    protected const int EOF = Eof;
-    protected const int HIDDEN = Hidden;
-}
-
-@header {
-#pragma warning disable 0419
-#pragma warning disable 3021
-#pragma warning disable 1574
-#pragma warning disable 1591
-#pragma warning disable 1658
-#pragma warning disable 1584
-#pragma warning disable 0108
-}
 
 /*
  * Parser Rules

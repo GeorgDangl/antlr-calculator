@@ -182,6 +182,11 @@ CalculatorVisitor.prototype.visitRad = function(ctx) {
 };
 
 
+// Visit a parse tree produced by CalculatorParser#Mult.
+CalculatorVisitor.prototype.visitMult = function(ctx) {
+};
+
+
 // Visit a parse tree produced by CalculatorParser#Sqr.
 CalculatorVisitor.prototype.visitSqr = function(ctx) {
 };

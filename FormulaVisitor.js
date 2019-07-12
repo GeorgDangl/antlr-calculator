@@ -70,7 +70,7 @@ var FormulaVisitor = (function (_super) {
 
     FormulaVisitor.prototype.visitMult = function (context) {
         return this.visitExpression(context.expression(0)) * this.visitExpression(context.expression(1));
-    }
+    };
     
     // Visit a parse tree produced by calculatorParser#Arcsin.
     FormulaVisitor.prototype.visitArcsin = function (context) {
