@@ -1,32 +1,39 @@
-﻿var webpack = require('webpack');
+﻿const path = require('path')
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
-    entry: "./Calculator",
-    output: {
-        filename: "./dist/bundle.js",
-        library: ["antlrCalc"] // Global variable name
+    entry: {
+        'antlrCalc': './src/index.ts'
     },
-    devtool: "source-map",
-    node: {
-        fs: "empty"
+    output: {
+        path: path.resolve(__dirname, 'dist', 'bundles'),
+        filename: '[name].js',
+        libraryTarget: 'umd',
+        library: 'antlrCalc',
+        umdNamedDefine: true
+    },
+    devtool: 'source-map',
+    resolve: {
+        extensions: ['.ts', '.js']
     },
     module: {
-        loaders: [
-            {
-                test: /\.ts$/,
-                loaders: ['ts']
-            }
-        ]
+        rules: [{
+            test: /\.ts$/,
+            loaders: ['ts-loader'],
+            exclude: /node_modules/
+        }]
     },
-    plugins: [
-        new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false
-            }
-        })
-    ],
-    resolve: {
-        extensions: ['', '.ts', '.js']
-    }
+    optimization: {
+        minimizer: [
+          new TerserPlugin({
+            cache: true,
+            parallel: true,
+            sourceMap: true
+          }),
+        ],
+      },
+      performance: {
+        maxEntrypointSize: 512000,
+          maxAssetSize: 512000
+      }
 };

@@ -2,7 +2,7 @@
 
     private _isValid = true;
     private _errorLocation: number | null = null;
-    private _errorMessage: string;
+    private _errorMessage: string | null = null;
 
     public get isValid() {
         return this._isValid;

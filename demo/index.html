@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="/css/style.cyan-600.min.css" />
     <link rel="stylesheet" href="/css/custom-styles.css" />
     <link rel="stylesheet" href="/css/custom-menu.css" />
-    <script type="text/javascript" src="dist/bundle.js"></script>
+    <script type="text/javascript" src="dist/bundles/antlrCalc.js"></script>
     <script type="text/javascript">
         function calculate() {
             var formula = document.getElementById('formulaInput').value;
@@ -99,6 +99,7 @@
 
         <div class="container body-content" style="flex: 1 0 auto;">
             <h1>antlr-calculator-demo</h1>
+            <h4>Version @@APP_VERSION@@</h4>
             <p>Enter your formula here:</p>
             <div>
                 <input type="text" class="form-control" placeholder="Formula, e.g. 2+2" id="formulaInput" onkeyup="calculate()" />
@@ -115,7 +116,7 @@
                 <div class="row d-block d-sm-none">
                     <div class="col-md-6 d-block d-sm-none">
                         <span class="ms-logo">GD</span> Georg Dangl ©
-                        2016 - 2019
+                        2016 - 2020
                     </div>
                     <div class="col-md-6 d-block d-sm-none">
                         <a href="https://blog.dangl.me">

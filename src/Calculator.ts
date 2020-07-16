@@ -1,10 +1,14 @@
 ﻿import { CalculationResult } from './CalculationResult';
 import { FormulaErrorListener } from './FormulaErrorListener';
+import { FormulaVisitor } from './FormulaVisitor';
+import { CalculatorLexer } from './GeneratedAntlr/CalculatorLexer';
+import { CalculatorParser } from './GeneratedAntlr/CalculatorParser';
+import { ANTLRInputStream, CommonTokenStream } from 'antlr4ts';
 
-var antlr4 = require('antlr4');
-var calculatorLexer = require('./GeneratedAntlr/CalculatorLexer');
-var calculatorParser = require('./GeneratedAntlr/CalculatorParser');
-var formulaVisitor = require('./FormulaVisitor.js');
+// var antlr4 = require('antlr4');
+// var calculatorLexer = require('./GeneratedAntlr/CalculatorLexer');
+// var calculatorParser = require('./GeneratedAntlr/CalculatorParser');
+// var formulaVisitor = require('./FormulaVisitor.js');
 
 export class Calculator {
     public static calculate(formula: string): CalculationResult {
@@ -14,13 +18,14 @@ export class Calculator {
             result.isValid = true;
             return result;
         }
-        var inputStream = new antlr4.InputStream(formula);
-        var lexer = new calculatorLexer.CalculatorLexer(inputStream);
-        var commonTokenStream = new antlr4.CommonTokenStream(lexer);
-        var parser = new calculatorParser.CalculatorParser(commonTokenStream);
+        var inputStream = new ANTLRInputStream(formula);
+        var lexer = new CalculatorLexer(inputStream);
+        var commonTokenStream = new CommonTokenStream(lexer);
+        var parser = new CalculatorParser(commonTokenStream);
         var errorListener = new FormulaErrorListener();
-        parser._listeners = [errorListener];
-        var visitor = new formulaVisitor.FormulaVisitor();
+        parser.removeErrorListeners();
+        parser.addErrorListener(errorListener);
+        var visitor = new FormulaVisitor();
         var parseTree = parser.calculator();
         if (errorListener.isValid) {
             var visitorResult = visitor.visitCalculator(parseTree);
