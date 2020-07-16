@@ -27,9 +27,6 @@ pipeline {
 
         }
         stage ('Deploy Demo') {
-            when {
-                branch 'master'
-            }
             steps {
                 script {
                     env.WebDeployPublishUrl = credentials('Danglserver3DeployEndpoint')
