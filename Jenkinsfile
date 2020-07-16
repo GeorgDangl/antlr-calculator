@@ -30,13 +30,10 @@ pipeline {
             steps {
                 script {
                     env.WebDeployPublishUrl = credentials('Danglserver3DeployEndpoint')
+                    env.WebDeployUsername = credentials('Danglserver3WebDeployUsername')
+                    env.WebDeployPassword = credentials('Danglserver3WebDeployPassword')
                 }
-                withCredentials([usernamePassword(
-                        credentialsId: 'Danglserver3DeployCredentials', 
-                        usernameVariable: 'WebDeployUsername', 
-                        passwordVariable: 'WebDeployPassword')]) {
-                    powershell './build.cmd DeployDemo -WebDeployUsername $WebDeployUsername -WebDeployPassword $WebDeployPassword'
-                }
+                powershell './build.cmd DeployDemo'
             }
         }
     }
