@@ -5,6 +5,7 @@ using Nuke.WebDeploy;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.Tools.Npm.NpmTasks;
 using static Nuke.WebDeploy.WebDeployTasks;
+using static Nuke.Common.IO.TextTasks;
 
 [UnsetVisualStudioEnvironmentVariables]
 class Build : NukeBuild
@@ -73,6 +74,8 @@ class Build : NukeBuild
             Npm("ci", RootDirectory);
             Npm("run build", RootDirectory);
             CopyDirectoryRecursively(RootDirectory / "dist", RootDirectory / "demo" / "dist");
+            WriteAllText(RootDirectory / "demo" / "index.html", ReadAllText(RootDirectory / "demo" / "index.html")
+                .Replace("@@APP_VERSION@@", GitVersion.NuGetVersion));
 
             WebDeploy(s => s
                 .SetSourcePath(RootDirectory / "demo")
