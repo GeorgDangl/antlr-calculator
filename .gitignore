@@ -267,3 +267,7 @@ __pycache__/
 
 # TypeScript typings
 typings/
+
+src/*.js
+src/*.js.map
+dist/
