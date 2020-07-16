@@ -1,5 +1,5 @@
-﻿var webpack = require('webpack');
-const path = require('path')
+﻿const path = require('path')
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -12,6 +12,7 @@ module.exports = {
         library: 'antlrCalc',
         umdNamedDefine: true
     },
+    devtool: 'source-map',
     resolve: {
         extensions: ['.ts', '.js']
     },
@@ -21,5 +22,18 @@ module.exports = {
             loaders: ['ts-loader'],
             exclude: /node_modules/
         }]
-    }
+    },
+    optimization: {
+        minimizer: [
+          new TerserPlugin({
+            cache: true,
+            parallel: true,
+            sourceMap: true
+          }),
+        ],
+      },
+      performance: {
+        maxEntrypointSize: 512000,
+          maxAssetSize: 512000
+      }
 };
