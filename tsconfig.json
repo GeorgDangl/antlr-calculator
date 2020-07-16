@@ -1,16 +1,19 @@
 ﻿{
   "compilerOptions": {
+    "target": "es2015",
+    "module": "commonjs",
+    "declaration": true,
+    "outDir": "./dist",
     "noImplicitAny": false,
-    "noEmitOnError": true,
-    "removeComments": false,
-    "sourceMap": true,
-    "target": "es5",
-    "lib": [ "es5", "dom", "es2015.core" ],
-    "moduleResolution": "node",
-    "module": "commonjs"
+    "lib": ["es2015", "es2015.core", "DOM"],
+    "types": [
+      "jasmine"
+    ]
   },
+  "include": ["src"],
   "compileOnSave": false,
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "**/*.spec.ts"
   ]
 }

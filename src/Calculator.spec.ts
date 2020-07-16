@@ -5,7 +5,7 @@ describe('Calculator',
 
         describe('with expression:',
             () => {
-                var expectations: { formula: string, expectedResult: number; }
+                var expectations: { formula: string, expectedResult: number; } | null;
 
                 beforeEach(() => {
                     expectations = null;
@@ -14,11 +14,13 @@ describe('Calculator',
                 afterEach(() => {
                     // Common code used in all tests
                     expect(expectations).not.toBeNull();
-                    var calculationResult = Calculator.calculate(expectations.formula);
-                    expect(calculationResult.isValid).toBeTruthy();
-                    expect(calculationResult.errorPosition).toBeNull();
-                    expect(calculationResult.errorMessage).toBeNull();
-                    expect(calculationResult.result).toBeCloseTo(expectations.expectedResult);
+                    if (expectations !== null) {
+                        var calculationResult = Calculator.calculate(expectations.formula);
+                        expect(calculationResult.isValid).toBeTruthy();
+                        expect(calculationResult.errorPosition).toBeNull();
+                        expect(calculationResult.errorMessage).toBeNull();
+                        expect(calculationResult.result).toBeCloseTo(expectations.expectedResult);
+                    }
                 });
 
                 it('Floor',
@@ -259,7 +261,7 @@ describe('Calculator',
 
         describe('with correct formulas:',
             () => {
-                var expectations: { formula: string, expectedResult: number; }
+                var expectations: { formula: string | null, expectedResult: number; } | null;
 
                 beforeEach(() => {
                     expectations = null;
@@ -268,20 +270,22 @@ describe('Calculator',
                 afterEach(() => {
                     // Common code used in all tests
                     expect(expectations).not.toBeNull();
-                    var calculationResult = Calculator.calculate(expectations.formula);
-                    expect(calculationResult.isValid).toBeTruthy(calculationResult.errorMessage);
-                    expect(calculationResult.errorPosition).toBeNull();
-                    expect(calculationResult.errorMessage).toBeNull();
-                    if (calculationResult.result > 1e300) {
-                        // The 0.99 * Number.MAX_VALUE test isn't getting that close==)
-                        if (expectations.expectedResult !== 0) {
-                            var relation = Math.abs(expectations.expectedResult / calculationResult.result);
-                            expect(relation).toBeCloseTo(1);
+                    if (expectations !== null) {
+                        var calculationResult = Calculator.calculate(<string>expectations.formula);
+                        expect(calculationResult.isValid).toBeTruthy(calculationResult.errorMessage);
+                        expect(calculationResult.errorPosition).toBeNull();
+                        expect(calculationResult.errorMessage).toBeNull();
+                        if (calculationResult.result > 1e300) {
+                            // The 0.99 * Number.MAX_VALUE test isn't getting that close==)
+                            if (expectations.expectedResult !== 0) {
+                                var relation = Math.abs(expectations.expectedResult / calculationResult.result);
+                                expect(relation).toBeCloseTo(1);
+                            } else {
+                                fail();
+                            }
                         } else {
-                            fail();
+                            expect(calculationResult.result).toBeCloseTo(expectations.expectedResult, 1);
                         }
-                    } else {
-                        expect(calculationResult.result).toBeCloseTo(expectations.expectedResult, 1);
                     }
                 });
 
@@ -565,7 +569,7 @@ describe('Calculator',
 
         describe('with invalid formulas:',
             () => {
-                var expectations: { formula: string, expectedErrorPosition: number; }
+                var expectations: { formula: string, expectedErrorPosition: number | null; } | null;
 
                 beforeEach(() => {
                     expectations = null;
@@ -574,10 +578,13 @@ describe('Calculator',
                 afterEach(() => {
                     // Common code used in all tests
                     expect(expectations).not.toBeNull();
-                    var calculationResult = Calculator.calculate(expectations.formula);
-                    expect(calculationResult.result).toBeNaN();
-                    expect(calculationResult.isValid).toBeFalsy();
-                    expect(calculationResult.errorPosition).toBe(expectations.expectedErrorPosition);
+                    if (expectations !== null)
+                    {
+                        var calculationResult = Calculator.calculate(expectations.formula);
+                        expect(calculationResult.result).toBeNaN();
+                        expect(calculationResult.isValid).toBeFalsy();
+                        expect(calculationResult.errorPosition).toBe(expectations.expectedErrorPosition);
+                    }
                 });
 
                 it('SingleCharacter',
