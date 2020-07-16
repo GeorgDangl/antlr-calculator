@@ -1,32 +1,25 @@
 ﻿var webpack = require('webpack');
+const path = require('path')
 
 module.exports = {
-    entry: "./Calculator",
-    output: {
-        filename: "./dist/bundle.js",
-        library: ["antlrCalc"] // Global variable name
+    entry: {
+        'antlrCalc': './src/index.ts'
     },
-    devtool: "source-map",
-    node: {
-        fs: "empty"
+    output: {
+        path: path.resolve(__dirname, 'dist', 'bundles'),
+        filename: '[name].js',
+        libraryTarget: 'umd',
+        library: 'antlrCalc',
+        umdNamedDefine: true
+    },
+    resolve: {
+        extensions: ['.ts', '.js']
     },
     module: {
-        loaders: [
-            {
-                test: /\.ts$/,
-                loaders: ['ts']
-            }
-        ]
-    },
-    plugins: [
-        new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false
-            }
-        })
-    ],
-    resolve: {
-        extensions: ['', '.ts', '.js']
+        rules: [{
+            test: /\.ts$/,
+            loaders: ['ts-loader'],
+            exclude: /node_modules/
+        }]
     }
 };
