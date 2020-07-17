@@ -64,6 +64,7 @@ class Build : NukeBuild
             var distDirectory = RootDirectory / "dist";
             CopyFile(RootDirectory / "README.md", distDirectory / "README.md");
             CopyFile(RootDirectory / "LICENSE.md", distDirectory / "LICENSE.md");
+            CopyFile(RootDirectory / "CHANGELOG.md", distDirectory / "CHANGELOG.md");
             CopyFile(RootDirectory / "package.json", distDirectory / "package.json");
             Npm($"version {GitVersion.NuGetVersion}", distDirectory);
 
