@@ -2,7 +2,7 @@
 
 All notable changes to **antlr-calculator** are documented here.
 
-## v2.0.1:
+## v2.0.2:
 - Automatic creation of GitHub releases was added
 
 ## v2.0.0:
