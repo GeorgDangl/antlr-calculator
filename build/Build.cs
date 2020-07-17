@@ -5,7 +5,14 @@ using Nuke.WebDeploy;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.Tools.Npm.NpmTasks;
 using static Nuke.WebDeploy.WebDeployTasks;
+using static Nuke.Common.ChangeLog.ChangelogTasks;
 using static Nuke.Common.IO.TextTasks;
+using static Nuke.GitHub.GitHubTasks;
+using Nuke.GitHub;
+using Nuke.Common.Git;
+using System;
+using System.Linq;
+using Nuke.Common.IO;
 
 [UnsetVisualStudioEnvironmentVariables]
 class Build : NukeBuild
@@ -16,16 +23,20 @@ class Build : NukeBuild
     ///   - Microsoft VisualStudio     https://nuke.build/visualstudio
     ///   - Microsoft VSCode           https://nuke.build/vscode
 
-    public static int Main () => Execute<Build>(x => x.Clean);
+    public static int Main() => Execute<Build>(x => x.Clean);
 
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
     readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
     [GitVersion(Framework = "netcoreapp3.1")] readonly GitVersion GitVersion;
+    [GitRepository] readonly GitRepository GitRepository;
+
+    AbsolutePath ChangeLogFile => RootDirectory / "CHANGELOG.md";
 
     [Parameter] string WebDeployUsername;
     [Parameter] string WebDeployPassword;
     [Parameter] string WebDeploySiteName = "AntlrCalculatorDemo";
     [Parameter] string WebDeployPublishUrl;
+    [Parameter] string GitHubAuthenticationToken;
 
     Target Clean => _ => _
         .Executes(() =>
@@ -87,5 +98,28 @@ class Build : NukeBuild
                 .SetEnableDoNotDeleteRule(false)
                 .SetRetryAttempts(5)
                 .SetWrapAppOffline(false));
+        });
+
+    Target PublishGitHubRelease => _ => _
+        .Requires(() => GitHubAuthenticationToken)
+        .OnlyWhenDynamic(() => GitVersion.BranchName.Equals("master") || GitVersion.BranchName.Equals("origin/master"))
+        .Executes(async () =>
+        {
+            var releaseTag = $"v{GitVersion.MajorMinorPatch}";
+
+            var changeLogSectionEntries = ExtractChangelogSectionNotes(ChangeLogFile);
+            var latestChangeLog = changeLogSectionEntries
+                .Aggregate((c, n) => c + Environment.NewLine + n);
+            var completeChangeLog = $"## {releaseTag}" + Environment.NewLine + latestChangeLog;
+
+            var repositoryInfo = GetGitHubRepositoryInfo(GitRepository);
+
+            await PublishRelease(x => x
+                    .SetCommitSha(GitVersion.Sha)
+                    .SetReleaseNotes(completeChangeLog)
+                    .SetRepositoryName(repositoryInfo.repositoryName)
+                    .SetRepositoryOwner(repositoryInfo.gitHubOwner)
+                    .SetTag(releaseTag)
+                    .SetToken(GitHubAuthenticationToken));
         });
 }
