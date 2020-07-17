@@ -36,6 +36,15 @@ pipeline {
                 powershell './build.cmd DeployDemo'
             }
         }
+        stage ('Publish GitHub Release') {
+            environment {
+                GitHubAuthenticationToken = credentials('GeorgDanglGitHubAccessToken')
+            }
+            steps {
+                powershell './build.cmd PublishGitHubRelease'
+            }
+
+        }
     }
     post {
         always {
