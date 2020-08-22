@@ -1,10 +1,8 @@
 using Nuke.Common;
 using Nuke.Common.Execution;
 using Nuke.Common.Tools.GitVersion;
-using Nuke.WebDeploy;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.Tools.Npm.NpmTasks;
-using static Nuke.WebDeploy.WebDeployTasks;
 using static Nuke.Common.ChangeLog.ChangelogTasks;
 using static Nuke.Common.IO.TextTasks;
 using static Nuke.GitHub.GitHubTasks;
@@ -13,6 +11,14 @@ using Nuke.Common.Git;
 using System;
 using System.Linq;
 using Nuke.Common.IO;
+using System.IO.Compression;
+using System.Text;
+using System.Net.Http;
+using Nuke.Common.Tools.AzureKeyVault.Attributes;
+using Nuke.Common.Tools.AzureKeyVault;
+using static Nuke.Common.Tools.Slack.SlackTasks;
+using Nuke.Common.Tools.Slack;
+using System.IO;
 
 [UnsetVisualStudioEnvironmentVariables]
 class Build : NukeBuild
@@ -31,12 +37,23 @@ class Build : NukeBuild
     [GitRepository] readonly GitRepository GitRepository;
 
     AbsolutePath ChangeLogFile => RootDirectory / "CHANGELOG.md";
+    AbsolutePath OutputDirectory => RootDirectory / "output";
 
-    [Parameter] string WebDeployUsername;
-    [Parameter] string WebDeployPassword;
-    [Parameter] string WebDeploySiteName = "AntlrCalculatorDemo";
-    [Parameter] string WebDeployPublishUrl;
-    [Parameter] string GitHubAuthenticationToken;
+    [KeyVaultSettings(
+        BaseUrlParameterName = nameof(KeyVaultBaseUrl),
+        ClientIdParameterName = nameof(KeyVaultClientId),
+        ClientSecretParameterName = nameof(KeyVaultClientSecret))]
+    readonly KeyVaultSettings KeyVaultSettings;
+    [Parameter] string KeyVaultBaseUrl;
+    [Parameter] string KeyVaultClientId;
+    [Parameter] string KeyVaultClientSecret;
+    [KeyVault] KeyVault KeyVault;
+
+    [KeyVaultSecret] string DanglCiCdSlackWebhookUrl;
+    [KeyVaultSecret("AntlrCalculatorDemo-WebDeployUsername")] string WebDeployUsername;
+    [KeyVaultSecret("AntlrCalculatorDemo-WebDeployPassword")] string WebDeployPassword;
+    [KeyVaultSecret] string GitHubAuthenticationToken;
+    [Parameter] string AppServiceName = "antlr-calculator-demo";
 
     Target Clean => _ => _
         .Executes(() =>
@@ -45,6 +62,7 @@ class Build : NukeBuild
             DeleteDirectory(RootDirectory / "demo" / "dist");
             DeleteDirectory(RootDirectory / "coverage");
             DeleteFile(RootDirectory / "karma-results.xml");
+            EnsureCleanDirectory(OutputDirectory);
         });
 
     Target Test => _ => _
@@ -79,9 +97,9 @@ class Build : NukeBuild
         .DependsOn(Clean)
         .Requires(() => WebDeployUsername)
         .Requires(() => WebDeployPassword)
-        .Requires(() => WebDeploySiteName)
-        .Requires(() => WebDeployPublishUrl)
-        .Executes(() =>
+        .Requires(() => AppServiceName)
+        .Requires(() => DanglCiCdSlackWebhookUrl)
+        .Executes(async () =>
         {
             Npm("ci", RootDirectory);
             Npm("run build", RootDirectory);
@@ -89,16 +107,40 @@ class Build : NukeBuild
             WriteAllText(RootDirectory / "demo" / "index.html", ReadAllText(RootDirectory / "demo" / "index.html")
                 .Replace("@@APP_VERSION@@", GitVersion.NuGetVersion));
 
-            WebDeploy(s => s
-                .SetSourcePath(RootDirectory / "demo")
-                .SetUsername(WebDeployUsername)
-                .SetPassword(WebDeployPassword)
-                .SetEnableAppOfflineRule(true)
-                .SetPublishUrl(WebDeployPublishUrl.TrimEnd('/') + "/msdeploy.axd?site=" + WebDeploySiteName)
-                .SetSiteName(WebDeploySiteName)
-                .SetEnableDoNotDeleteRule(false)
-                .SetRetryAttempts(5)
-                .SetWrapAppOffline(false));
+            var base64Auth = Convert.ToBase64String(Encoding.Default.GetBytes($"{WebDeployUsername}:{WebDeployPassword}"));
+            ZipFile.CreateFromDirectory(RootDirectory / "demo", OutputDirectory / "deployment.zip");
+            using (var memStream = new MemoryStream(ReadAllBytes(OutputDirectory / "deployment.zip")))
+            {
+                memStream.Position = 0;
+                var content = new StreamContent(memStream);
+                var httpClient = new HttpClient();
+                httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", base64Auth);
+                var requestUrl = $"https://{AppServiceName}.scm.azurewebsites.net/api/zipdeploy";
+                var response = await httpClient.PostAsync(requestUrl, content);
+                var responseString = await response.Content.ReadAsStringAsync();
+                Logger.Normal(responseString);
+                Logger.Normal("Deployment finished");
+                if (!response.IsSuccessStatusCode)
+                {
+                    ControlFlow.Fail("Deployment returned status code: " + response.StatusCode);
+                }
+                else
+                {
+                    await SendSlackMessageAsync(c => c
+                        .SetUsername("Dangl CI Build")
+                        .SetAttachments(new SlackMessageAttachment()
+                            .SetText($"A new version was deployed for antlr-calculator")
+                            .SetColor("good")
+                            .SetFields(new[]
+                            {
+                                        new SlackMessageField
+                                        ()
+                                        .SetTitle("Version")
+                                        .SetValue(GitVersion.NuGetVersion)
+                            })),
+                            DanglCiCdSlackWebhookUrl);
+                }
+            }
         });
 
     Target PublishGitHubRelease => _ => _

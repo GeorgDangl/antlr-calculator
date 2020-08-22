@@ -7,6 +7,11 @@ pipeline {
             label 'master'
         }
     }
+    environment {
+        KeyVaultBaseUrl = credentials('AzureCiKeyVaultBaseUrl')
+        KeyVaultClientId = credentials('AzureCiKeyVaultClientId')
+        KeyVaultClientSecret = credentials('AzureCiKeyVaultClientSecret')
+    }
     stages {
         stage ('Test') {
             steps {
@@ -24,26 +29,16 @@ pipeline {
             steps {
                 powershell './build.cmd Publish'
             }
-
         }
         stage ('Deploy Demo') {
-            environment {
-                WebDeployPublishUrl = credentials('Danglserver3DeployEndpoint')
-                WebDeployUsername = credentials('Danglserver3WebDeployUsername')
-                WebDeployPassword = credentials('Danglserver3WebDeployPassword')
-            }
             steps {
                 powershell './build.cmd DeployDemo'
             }
         }
         stage ('Publish GitHub Release') {
-            environment {
-                GitHubAuthenticationToken = credentials('GeorgDanglGitHubAccessToken')
-            }
             steps {
                 powershell './build.cmd PublishGitHubRelease'
             }
-
         }
     }
     post {
