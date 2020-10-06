@@ -9,7 +9,7 @@ import { FormulaVisitor } from './FormulaVisitor';
 export class Calculator {
     public static calculate(formula: string): CalculationResult {
         var result = new CalculationResult();
-        if (formula === null || /^\s*$/.test(formula)) {
+        if (formula == null || /^\s*$/.test(formula)) {
             result.result = 0;
             result.isValid = true;
             return result;
