@@ -1,19 +1,15 @@
-﻿import { CalculationResult } from './CalculationResult';
-import { FormulaErrorListener } from './FormulaErrorListener';
-import { FormulaVisitor } from './FormulaVisitor';
+﻿import { ANTLRInputStream, CommonTokenStream } from 'antlr4ts';
+
+import { CalculationResult } from './CalculationResult';
 import { CalculatorLexer } from './GeneratedAntlr/CalculatorLexer';
 import { CalculatorParser } from './GeneratedAntlr/CalculatorParser';
-import { ANTLRInputStream, CommonTokenStream } from 'antlr4ts';
-
-// var antlr4 = require('antlr4');
-// var calculatorLexer = require('./GeneratedAntlr/CalculatorLexer');
-// var calculatorParser = require('./GeneratedAntlr/CalculatorParser');
-// var formulaVisitor = require('./FormulaVisitor.js');
+import { FormulaErrorListener } from './FormulaErrorListener';
+import { FormulaVisitor } from './FormulaVisitor';
 
 export class Calculator {
     public static calculate(formula: string): CalculationResult {
         var result = new CalculationResult();
-        if (formula === null || formula.match(/^\s*$/) !== null) {
+        if (formula == null || /^\s*$/.test(formula)) {
             result.result = 0;
             result.isValid = true;
             return result;
