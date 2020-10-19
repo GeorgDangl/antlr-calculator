@@ -75,6 +75,8 @@ class Build : NukeBuild
 
     Target Publish => _ => _
         .DependsOn(Clean)
+        .OnlyWhenDynamic(() => Nuke.Common.CI.Jenkins.Jenkins.Instance == null
+            || Nuke.Common.CI.Jenkins.Jenkins.Instance.ChangeId == null)
         .Executes(() =>
         {
             Npm("ci", RootDirectory);
@@ -99,6 +101,8 @@ class Build : NukeBuild
         .Requires(() => WebDeployPassword)
         .Requires(() => AppServiceName)
         .Requires(() => DanglCiCdSlackWebhookUrl)
+        .OnlyWhenDynamic(() => Nuke.Common.CI.Jenkins.Jenkins.Instance == null
+            || Nuke.Common.CI.Jenkins.Jenkins.Instance.ChangeId == null)
         .Executes(async () =>
         {
             Npm("ci", RootDirectory);
