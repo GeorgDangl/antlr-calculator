@@ -1,6 +1,6 @@
 ﻿# antlr-calculator
 
-[![Build Status](https://jenkins.dangl.me/buildStatus/icon?job=antlr-calculator)](https://jenkins.dangl.me/buildStatus/icon?job=antlr-calculator)
+[![Build Status](https://jenkins.dangl.me/buildStatus/icon?job=GeorgDangl%2Fantlr-calculator%2Fdevelop)](https://jenkins.dangl.me/job/GeorgDangl/job/antlr-calculator/job/develop/)
 [![npm](https://img.shields.io/npm/v/antlr-calculator.svg)](https://www.npmjs.com/package/antlr-calculator)
 
 This calculator is using the [ANTLR4 TypeScript target](https://github.com/tunnelvisionlabs/antlr4ts)
