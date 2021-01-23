@@ -18,7 +18,7 @@ grammar Calculator;
  */
 
 // Main entry for the calculator
-calculator : expression '='? compileUnit;
+calculator : expression '='? trailingComment? compileUnit;
 
 // Possible expression types
 expression    :    SUB expression                              #Unary          // Unary minus sign (negative numbers)
@@ -63,10 +63,12 @@ expression    :    SUB expression                              #Unary          /
               |    NUMBER                                      #Number         // Single integer or float number
               |    PI '()'?                                    #Pi             // Mathematical constant pi = 3,141593
               |    EULER                                       #Euler          // Mathematical constant e = 2,718282
+              |    SUBSTITUTION                                #Substitution
               ;
 
 // End of file
-compileUnit    :    EOF;
+trailingComment: SEMICOLON .*? ;
+compileUnit    : EOF ;
 
 /*
  * Lexer Rules
@@ -117,6 +119,8 @@ RAD         : [Rr][Aa][Dd]                    ;
 DEG         : [Dd][Ee][Gg]                    ;
 WS          : (' '|'\t'|'\r'|'\n') -> skip    ;
 COM         : COMMENT              -> skip    ;
+SUBSTITUTION: '#' ([a-z] | [A-Z] | [äÄöÖüÜ] | [0-9])+ ;
+SEMICOLON   : ';'                             ;
 INVALID     : .                               ;
 
 fragment COMMENT    : '/*' .*? '*/'

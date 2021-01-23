@@ -1,4 +1,4 @@
-﻿import { ANTLRInputStream, CommonTokenStream } from 'antlr4ts';
+import { ANTLRInputStream, CommonTokenStream } from 'antlr4ts';
 
 import { CalculationResult } from './CalculationResult';
 import { CalculatorLexer } from './GeneratedAntlr/CalculatorLexer';
@@ -7,7 +7,7 @@ import { FormulaErrorListener } from './FormulaErrorListener';
 import { FormulaVisitor } from './FormulaVisitor';
 
 export class Calculator {
-    public static calculate(formula: string): CalculationResult {
+    public static calculate(formula: string, substitutionResolver?: (substitution: string) => number): CalculationResult {
         var result = new CalculationResult();
         if (formula == null || /^\s*$/.test(formula)) {
             result.result = 0;
@@ -21,10 +21,14 @@ export class Calculator {
         var errorListener = new FormulaErrorListener();
         parser.removeErrorListeners();
         parser.addErrorListener(errorListener);
-        var visitor = new FormulaVisitor();
+        if (!substitutionResolver) {
+            substitutionResolver = _ => null;
+        }
+
+        var visitor = new FormulaVisitor(substitutionResolver, errorListener);
         var parseTree = parser.calculator();
+        var visitorResult = visitor.visitCalculator(parseTree);
         if (errorListener.isValid) {
-            var visitorResult = visitor.visitCalculator(parseTree);
             if (isNaN(visitorResult)) {
                 result.isValid = false;
                 result.result = NaN;

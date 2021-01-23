@@ -460,8 +460,7 @@ describe('Calculator',
                     () => {
                         expectations = {
                             formula: 'sqrt(4)',
-                            expectedResult:
-                            2
+                            expectedResult: 2
                         };
                     });
 
@@ -578,8 +577,7 @@ describe('Calculator',
                 afterEach(() => {
                     // Common code used in all tests
                     expect(expectations).not.toBeNull();
-                    if (expectations !== null)
-                    {
+                    if (expectations !== null) {
                         var calculationResult = Calculator.calculate(expectations.formula);
                         expect(calculationResult.result).toBeNaN();
                         expect(calculationResult.isValid).toBeFalsy();
@@ -635,4 +633,298 @@ describe('Calculator',
                         };
                     });
             });
+
+        describe('with division by zero', () => {
+            it('test 01', () => {
+                const formula = '1/0';
+                var calculationResult = Calculator.calculate(formula);
+                expect(calculationResult.result).toBeNaN()
+                expect(calculationResult.isValid).toBeFalse();
+            });
+
+            it('test 02', () => {
+                const formula = '-1/0';
+                var calculationResult = Calculator.calculate(formula);
+                expect(calculationResult.result).toBeNaN()
+                expect(calculationResult.isValid).toBeFalse();
+            });
+
+            it('test 03', () => {
+                const formula = 'floor(1/0)';
+                var calculationResult = Calculator.calculate(formula);
+                expect(calculationResult.result).toBeNaN()
+                expect(calculationResult.isValid).toBeFalse();
+            });
+        });
+
+        describe('with substitutions', () => {
+
+            it('ErrorWhenSubstitutionCanNotBeResolved_NoneGiven', () => {
+                const formula = "1+#1";
+                const result = Calculator.calculate(formula);
+
+                expect(result.isValid).toBeFalse();
+                expect(result.result).toBeNaN();
+                expect(result.errorPosition).toBe(2);
+                expect(result.errorMessage).toContain('#1');
+            });
+
+            it('ErrorWhenSubstitutionCanNotBeResolved_ReturnsNull', () => {
+                const formula = "1+#1";
+                const result = Calculator.calculate(formula, _ => null);
+
+                console.log(result);
+
+                expect(result.isValid).toBeFalse();
+                expect(result.result).toBeNaN();
+                expect(result.errorPosition).toBe(2);
+                expect(result.errorMessage).toContain('#1');
+            });
+
+            it('CanCalculateSubstitution', () => {
+                const formula = "1+#Z";
+                const result = Calculator.calculate(formula, _ => 3);
+
+                expect(result.isValid).toBeTrue();
+                expect(result.result).toBe(4);
+            });
+
+            it('CanCalculateSubstitution_02', () => {
+                const formula = "1+#Z4+4";
+                const result = Calculator.calculate(formula, _ => 3);
+
+                expect(result.isValid).toBeTrue();
+                expect(result.result).toBe(8);
+            });
+
+            it('CanCalculateMultipleSubstitutions', () => {
+                const formula = "#first + #second * #third";
+                const result = Calculator.calculate(formula, _ => 3);
+
+                expect(result.isValid).toBeTrue();
+                expect(result.result).toBe(12);
+            });
+
+            it('CanSubstituteCustomValues', () => {
+                const formula = "#first + #second * #third";
+                const result = Calculator.calculate(formula, substitution => {
+                    switch (substitution) {
+                        case "#first":
+                            return 2;
+                        case "#second":
+                            return 3;
+                        case "#third":
+                            return 4;
+                        default:
+                            throw new Error();
+                    }
+                });
+
+                expect(result.isValid).toBeTrue();
+                expect(result.result).toBe(14);
+            });
+
+            it('CanSubstituteComplex', () => {
+                const formula = "log10*pi/#12d*e";
+                const result = Calculator.calculate(formula, _ => 3);
+
+                expect(result.isValid).toBeTrue();
+                expect(result.result).toBeCloseTo(2.846578, 5);
+            });
+
+            it('ReportsCorrectSubstitution', () => {
+                const formula = "1+2+#3+4";
+                let reportedSubstitution = '';
+                const result = Calculator.calculate(formula, subs => {
+                    reportedSubstitution = subs;
+                    return null;
+                });
+                expect(reportedSubstitution).toBe("#3");
+            });
+
+            it('IgnoresSubstitutionLikeInComment_DoubleQuotes', () => {
+                const formula = "1+2+\"#3+\"4";
+                const actual = Calculator.calculate(formula);
+                expect(actual.result).toBe(7);
+                expect(actual.isValid).toBeTrue();
+            });
+
+            it('IgnoresSubstitutionLikeInComment_SingleQuotes', () => {
+                const formula = "1+2+'#3+'4";
+                const actual = Calculator.calculate(formula);
+                expect(actual.result).toBe(7);
+                expect(actual.isValid).toBeTrue();
+            });
+
+            it('IgnoresSubstitutionLikeInComment_CStyle', () => {
+                const formula = "1+2+/*#3+*/4";
+                const actual = Calculator.calculate(formula);
+                expect(actual.result).toBe(7);
+                expect(actual.isValid).toBeTrue();
+            });
+        });
+
+        describe('with trailing comments after semicolon', () => {
+            var expectations: { formula: string, expectedResult: number | null, shouldBeSuccess: boolean; };
+
+            beforeEach(() => {
+                expectations = null;
+            });
+
+            afterEach(() => {
+                // Common code used in all tests
+                expect(expectations).not.toBeNull();
+                if (expectations !== null) {
+                    var calculationResult = Calculator.calculate(expectations.formula);
+                    if (expectations.expectedResult != null) {
+                        expect(calculationResult.result).toBe(expectations.expectedResult);
+                    }
+                    expect(calculationResult.isValid).toBe(expectations.shouldBeSuccess);
+                }
+            });
+
+            it('CalculatesCorrectly_WithoutExtraText', () => {
+                expectations = {
+                    formula: "1+1;",
+                    expectedResult: 2,
+                    shouldBeSuccess: true
+                };
+            });
+
+            it('CalculatesCorrectly_WithSingleLetterExtraText', () => {
+                expectations = {
+                    formula: "1+1;a",
+                    expectedResult: 2,
+                    shouldBeSuccess: true
+                };
+            });
+
+            it('CalculatesCorrectly_WithExtraText', () => {
+                expectations = {
+                    formula: "1+1;Hello World!",
+                    expectedResult: 2,
+                    shouldBeSuccess: true
+                };
+            });
+
+            it('CalculatesCorrectly_WithExtraTextAndNewlines_01', () => {
+                expectations = {
+                    formula: "1+1;Hello\rWorld!",
+                    expectedResult: 2,
+                    shouldBeSuccess: true
+                };
+            });
+
+            it('CalculatesCorrectly_WithExtraTextAndNewlines_02', () => {
+                expectations = {
+                    formula: "1+1;Hello\r\nWorld!",
+                    expectedResult: 2,
+                    shouldBeSuccess: true
+                };
+            });
+
+            it('CalculatesCorrectly_WithExtraTextAndNewlines_03', () => {
+                expectations = {
+                    formula: "1+1;Hello\nWorld!",
+                    expectedResult: 2,
+                    shouldBeSuccess: true
+                };
+            });
+
+            it('CalculatesCorrectly_WithExtraTextWithManySymbols', () => {
+                expectations = {
+                    formula: "1+1;012abcABC#öäüÄÖÜ!\"§😀",
+                    expectedResult: 2,
+                    shouldBeSuccess: true
+                };
+            });
+
+            it('CalculatesCorrectly_WithSemicolonInComment_DoubleQuotes', () => {
+                expectations = {
+                    formula: "1\"here;look\"+1",
+                    expectedResult: 2,
+                    shouldBeSuccess: true
+                };
+            });
+
+            it('CalculatesCorrectly_WithSemicolonInComment_SingleQuotes', () => {
+                expectations = {
+                    formula: "1'here;look'+1",
+                    expectedResult: 2,
+                    shouldBeSuccess: true
+                };
+            });
+
+            it('CalculatesCorrectly_WithSemicolonInComment_CStyle', () => {
+                expectations = {
+                    formula: "1/*here;look*/+1",
+                    expectedResult: 2,
+                    shouldBeSuccess: true
+                };
+            });
+
+            it('CalculatesCorrectly_WithSemicolonInCommentAndAtEndWithoutExtraText_DoubleQuotes', () => {
+                expectations = {
+                    formula: "1\"here;look\"+1;",
+                    expectedResult: 2,
+                    shouldBeSuccess: true
+                };
+            });
+
+            it('CalculatesCorrectly_WithSemicolonInCommentAndAtEndWithoutExtraText_SingleQuotes', () => {
+                expectations = {
+                    formula: "1'here;look'+1;",
+                    expectedResult: 2,
+                    shouldBeSuccess: true
+                };
+            });
+
+            it('CalculatesCorrectly_WithSemicolonInCommentAndAtEndWithoutExtraText_CStyle', () => {
+                expectations = {
+                    formula: "1/*here;look*/+1;",
+                    expectedResult: 2,
+                    shouldBeSuccess: true
+                };
+            });
+
+            it('CalculatesCorrectly_WithSemicolonInCommentAndAtEndWithExtraText_DoubleQuotes', () => {
+                expectations = {
+                    formula: "1\"here;look\"+1;Hello World!",
+                    expectedResult: 2,
+                    shouldBeSuccess: true
+                };
+            });
+
+            it('CalculatesCorrectly_WithSemicolonInCommentAndAtEndWithExtraText_SingleQuotes', () => {
+                expectations = {
+                    formula: "1'here;look'+1;Hello World!",
+                    expectedResult: 2,
+                    shouldBeSuccess: true
+                };
+            });
+
+            it('CalculatesCorrectly_WithSemicolonInCommentAndAtEndWithExtraText_CStyle', () => {
+                expectations = {
+                    formula: "1/*here;look*/+1;Hello World!",
+                    expectedResult: 2,
+                    shouldBeSuccess: true
+                };
+            });
+
+            it('DoesNotFailDueToFalselyDetectedSubstitutionAfterSemicolon_01', () => {
+                expectations = {
+                    formula: "1+1;See #1",
+                    expectedResult: 2,
+                    shouldBeSuccess: true
+                };
+            });
+
+            it('DoesNotFailDueToFalselyDetectedSubstitutionAfterSemicolon_02', () => {
+                expectations = {
+                    formula: "1+1;See #1",
+                    expectedResult: 2,
+                    shouldBeSuccess: true
+                };
+            });
+        });
     });

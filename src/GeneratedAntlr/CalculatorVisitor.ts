@@ -44,8 +44,10 @@ import { AddSubContext } from "./CalculatorParser";
 import { NumberContext } from "./CalculatorParser";
 import { PiContext } from "./CalculatorParser";
 import { EulerContext } from "./CalculatorParser";
+import { SubstitutionContext } from "./CalculatorParser";
 import { CalculatorContext } from "./CalculatorParser";
 import { ExpressionContext } from "./CalculatorParser";
+import { TrailingCommentContext } from "./CalculatorParser";
 import { CompileUnitContext } from "./CalculatorParser";
 
 
@@ -386,6 +388,14 @@ export interface CalculatorVisitor<Result> extends ParseTreeVisitor<Result> {
 	visitEuler?: (ctx: EulerContext) => Result;
 
 	/**
+	 * Visit a parse tree produced by the `Substitution`
+	 * labeled alternative in `CalculatorParser.expression`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitSubstitution?: (ctx: SubstitutionContext) => Result;
+
+	/**
 	 * Visit a parse tree produced by `CalculatorParser.calculator`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -398,6 +408,13 @@ export interface CalculatorVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitExpression?: (ctx: ExpressionContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `CalculatorParser.trailingComment`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitTrailingComment?: (ctx: TrailingCommentContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `CalculatorParser.compileUnit`.
