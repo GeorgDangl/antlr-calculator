@@ -17,6 +17,8 @@ Whenever a calculation is performed, a `CalculationResult` is returned with the 
 
 [You can check out the live demo here!](https://antlr-calculator.dangl.me)
 
+You can find the .NET version here: https://github.com/GeorgDangl/Dangl.Calculator
+
 ## Installation
 
 Clone this repository or just go with `npm install antlr-calculator`.
