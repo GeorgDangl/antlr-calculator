@@ -19,6 +19,7 @@ using Nuke.Common.Tools.AzureKeyVault;
 using static Nuke.Common.Tools.Slack.SlackTasks;
 using Nuke.Common.Tools.Slack;
 using System.IO;
+using Nuke.Common.Tools.Teams;
 
 [UnsetVisualStudioEnvironmentVariables]
 class Build : NukeBuild
@@ -53,7 +54,31 @@ class Build : NukeBuild
     [KeyVaultSecret("AntlrCalculatorDemo-WebDeployUsername")] string WebDeployUsername;
     [KeyVaultSecret("AntlrCalculatorDemo-WebDeployPassword")] string WebDeployPassword;
     [KeyVaultSecret] string GitHubAuthenticationToken;
+    [KeyVaultSecret] readonly string DanglCiCdTeamsWebhookUrl;
     [Parameter] string AppServiceName = "antlr-calculator-demo";
+
+    protected override void OnTargetFailed(string target)
+    {
+        if (IsServerBuild)
+        {
+            SendTeamsMessage("Build Failed", $"Target {target} failed for Dangl.Calculator, " +
+                        $"Branch: {GitRepository.Branch}", true);
+        }
+    }
+
+    void SendTeamsMessage(string title, string message, bool isError)
+    {
+        if (!string.IsNullOrWhiteSpace(DanglCiCdTeamsWebhookUrl))
+        {
+            var themeColor = isError ? "f44336" : "00acc1";
+            TeamsTasks
+                .SendTeamsMessage(m => m
+                    .SetTitle(title)
+                    .SetText(message)
+                    .SetThemeColor(themeColor),
+                    DanglCiCdTeamsWebhookUrl);
+        }
+    }
 
     Target Clean => _ => _
         .Executes(() =>
@@ -93,6 +118,12 @@ class Build : NukeBuild
             : "next";
 
             Npm($"publish --tag={npmTag}", distDirectory);
+
+            if (npmTag == "latest")
+            {
+                SendTeamsMessage("New Release", $"New release available for antlr-calculator: {GitVersion.NuGetVersion}", false);
+            }
+
         });
 
     Target DeployDemo => _ => _
