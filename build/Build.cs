@@ -31,8 +31,8 @@ class Build : NukeBuild
 
     public static int Main() => Execute<Build>(x => x.Clean);
 
-    [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
-    readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
+    [Parameter] readonly string Configuration = IsLocalBuild ? "Debug" : "Release";
+
     [GitVersion(Framework = "netcoreapp3.1")] readonly GitVersion GitVersion;
     [GitRepository] readonly GitRepository GitRepository;
 
