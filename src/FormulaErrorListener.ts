@@ -58,4 +58,10 @@
      */
     public reportContextSensitivity(recognizer, dfa, startIndex, stopIndex, prediction, configs) {
     };
+
+    public reportSubstitutionNotFound(errorLocation: number, substitution: string) {
+        this._isValid = false;
+        this._errorLocation = errorLocation;
+        this._errorMessage = `The substitution '${substitution}' could not be resolved`;
+    }
 }

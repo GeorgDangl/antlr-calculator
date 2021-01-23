@@ -1,4 +1,4 @@
-// Generated from ./src/Calculator.g4 by ANTLR 4.7.3-SNAPSHOT
+// Generated from ./src/Calculator.g4 by ANTLR 4.9.0-SNAPSHOT
 
 
 import { ParseTreeListener } from "antlr4ts/tree/ParseTreeListener";
@@ -44,8 +44,10 @@ import { AddSubContext } from "./CalculatorParser";
 import { NumberContext } from "./CalculatorParser";
 import { PiContext } from "./CalculatorParser";
 import { EulerContext } from "./CalculatorParser";
+import { SubstitutionContext } from "./CalculatorParser";
 import { CalculatorContext } from "./CalculatorParser";
 import { ExpressionContext } from "./CalculatorParser";
+import { TrailingCommentContext } from "./CalculatorParser";
 import { CompileUnitContext } from "./CalculatorParser";
 
 
@@ -588,6 +590,19 @@ export interface CalculatorListener extends ParseTreeListener {
 	exitEuler?: (ctx: EulerContext) => void;
 
 	/**
+	 * Enter a parse tree produced by the `Substitution`
+	 * labeled alternative in `CalculatorParser.expression`.
+	 * @param ctx the parse tree
+	 */
+	enterSubstitution?: (ctx: SubstitutionContext) => void;
+	/**
+	 * Exit a parse tree produced by the `Substitution`
+	 * labeled alternative in `CalculatorParser.expression`.
+	 * @param ctx the parse tree
+	 */
+	exitSubstitution?: (ctx: SubstitutionContext) => void;
+
+	/**
 	 * Enter a parse tree produced by `CalculatorParser.calculator`.
 	 * @param ctx the parse tree
 	 */
@@ -608,6 +623,17 @@ export interface CalculatorListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitExpression?: (ctx: ExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `CalculatorParser.trailingComment`.
+	 * @param ctx the parse tree
+	 */
+	enterTrailingComment?: (ctx: TrailingCommentContext) => void;
+	/**
+	 * Exit a parse tree produced by `CalculatorParser.trailingComment`.
+	 * @param ctx the parse tree
+	 */
+	exitTrailingComment?: (ctx: TrailingCommentContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `CalculatorParser.compileUnit`.
