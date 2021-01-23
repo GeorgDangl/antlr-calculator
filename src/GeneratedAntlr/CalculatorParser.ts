@@ -1,4 +1,4 @@
-// Generated from ./src/Calculator.g4 by ANTLR 4.7.3-SNAPSHOT
+// Generated from ./src/Calculator.g4 by ANTLR 4.9.0-SNAPSHOT
 
 
 import { ATN } from "antlr4ts/atn/ATN";
@@ -125,6 +125,10 @@ export class CalculatorParser extends Parser {
 
 	// @Override
 	public get serializedATN(): string { return CalculatorParser._serializedATN; }
+
+	protected createFailedPredicateException(predicate?: string, message?: string): FailedPredicateException {
+		return new FailedPredicateException(this, predicate, message);
+	}
 
 	constructor(input: TokenStream) {
 		super(input);
@@ -654,7 +658,7 @@ export class CalculatorParser extends Parser {
 						this.pushNewRecursionContext(_localctx, _startState, CalculatorParser.RULE_expression);
 						this.state = 102;
 						if (!(this.precpred(this._ctx, 15))) {
-							throw new FailedPredicateException(this, "this.precpred(this._ctx, 15)");
+							throw this.createFailedPredicateException("this.precpred(this._ctx, 15)");
 						}
 						this.state = 103;
 						this.match(CalculatorParser.EXPONENT);
@@ -669,7 +673,7 @@ export class CalculatorParser extends Parser {
 						this.pushNewRecursionContext(_localctx, _startState, CalculatorParser.RULE_expression);
 						this.state = 105;
 						if (!(this.precpred(this._ctx, 14))) {
-							throw new FailedPredicateException(this, "this.precpred(this._ctx, 14)");
+							throw this.createFailedPredicateException("this.precpred(this._ctx, 14)");
 						}
 						this.state = 106;
 						this.match(CalculatorParser.NEGEXPONENT);
@@ -684,7 +688,7 @@ export class CalculatorParser extends Parser {
 						this.pushNewRecursionContext(_localctx, _startState, CalculatorParser.RULE_expression);
 						this.state = 108;
 						if (!(this.precpred(this._ctx, 13))) {
-							throw new FailedPredicateException(this, "this.precpred(this._ctx, 13)");
+							throw this.createFailedPredicateException("this.precpred(this._ctx, 13)");
 						}
 						this.state = 109;
 						(_localctx as PowContext)._op = this._input.LT(1);
@@ -710,7 +714,7 @@ export class CalculatorParser extends Parser {
 						this.pushNewRecursionContext(_localctx, _startState, CalculatorParser.RULE_expression);
 						this.state = 111;
 						if (!(this.precpred(this._ctx, 12))) {
-							throw new FailedPredicateException(this, "this.precpred(this._ctx, 12)");
+							throw this.createFailedPredicateException("this.precpred(this._ctx, 12)");
 						}
 						this.state = 112;
 						_la = this._input.LA(1);
@@ -735,7 +739,7 @@ export class CalculatorParser extends Parser {
 						this.pushNewRecursionContext(_localctx, _startState, CalculatorParser.RULE_expression);
 						this.state = 114;
 						if (!(this.precpred(this._ctx, 11))) {
-							throw new FailedPredicateException(this, "this.precpred(this._ctx, 11)");
+							throw this.createFailedPredicateException("this.precpred(this._ctx, 11)");
 						}
 						this.state = 115;
 						this.match(CalculatorParser.WHOLE);
@@ -750,7 +754,7 @@ export class CalculatorParser extends Parser {
 						this.pushNewRecursionContext(_localctx, _startState, CalculatorParser.RULE_expression);
 						this.state = 117;
 						if (!(this.precpred(this._ctx, 10))) {
-							throw new FailedPredicateException(this, "this.precpred(this._ctx, 10)");
+							throw this.createFailedPredicateException("this.precpred(this._ctx, 10)");
 						}
 						this.state = 118;
 						(_localctx as SqRootContext)._op = this._input.LT(1);
@@ -776,7 +780,7 @@ export class CalculatorParser extends Parser {
 						this.pushNewRecursionContext(_localctx, _startState, CalculatorParser.RULE_expression);
 						this.state = 120;
 						if (!(this.precpred(this._ctx, 9))) {
-							throw new FailedPredicateException(this, "this.precpred(this._ctx, 9)");
+							throw this.createFailedPredicateException("this.precpred(this._ctx, 9)");
 						}
 						this.state = 121;
 						(_localctx as MulDivContext)._op = this._input.LT(1);
@@ -802,7 +806,7 @@ export class CalculatorParser extends Parser {
 						this.pushNewRecursionContext(_localctx, _startState, CalculatorParser.RULE_expression);
 						this.state = 123;
 						if (!(this.precpred(this._ctx, 5))) {
-							throw new FailedPredicateException(this, "this.precpred(this._ctx, 5)");
+							throw this.createFailedPredicateException("this.precpred(this._ctx, 5)");
 						}
 						this.state = 124;
 						(_localctx as AddSubContext)._op = this._input.LT(1);
@@ -828,7 +832,7 @@ export class CalculatorParser extends Parser {
 						this.pushNewRecursionContext(_localctx, _startState, CalculatorParser.RULE_expression);
 						this.state = 126;
 						if (!(this.precpred(this._ctx, 7))) {
-							throw new FailedPredicateException(this, "this.precpred(this._ctx, 7)");
+							throw this.createFailedPredicateException("this.precpred(this._ctx, 7)");
 						}
 						this.state = 127;
 						this.match(CalculatorParser.T__1);
@@ -2025,7 +2029,7 @@ export class NegExponentContext extends ExpressionContext {
 	}
 }
 export class PowContext extends ExpressionContext {
-	public _op: Token;
+	public _op!: Token;
 	public expression(): ExpressionContext[];
 	public expression(i: number): ExpressionContext;
 	public expression(i?: number): ExpressionContext | ExpressionContext[] {
@@ -2133,7 +2137,7 @@ export class WholeContext extends ExpressionContext {
 	}
 }
 export class SqRootContext extends ExpressionContext {
-	public _op: Token;
+	public _op!: Token;
 	public expression(): ExpressionContext[];
 	public expression(i: number): ExpressionContext;
 	public expression(i?: number): ExpressionContext | ExpressionContext[] {
@@ -2169,7 +2173,7 @@ export class SqRootContext extends ExpressionContext {
 	}
 }
 export class MulDivContext extends ExpressionContext {
-	public _op: Token;
+	public _op!: Token;
 	public expression(): ExpressionContext[];
 	public expression(i: number): ExpressionContext;
 	public expression(i?: number): ExpressionContext | ExpressionContext[] {
@@ -2271,7 +2275,7 @@ export class MultContext extends ExpressionContext {
 	}
 }
 export class AddSubContext extends ExpressionContext {
-	public _op: Token;
+	public _op!: Token;
 	public expression(): ExpressionContext[];
 	public expression(i: number): ExpressionContext;
 	public expression(i?: number): ExpressionContext | ExpressionContext[] {
