@@ -1,4 +1,4 @@
-import { ANTLRInputStream, CommonTokenStream } from 'antlr4ts';
+﻿import { CharStreams, CommonTokenStream } from 'antlr4ts';
 
 import { CalculationResult } from './CalculationResult';
 import { CalculatorLexer } from './GeneratedAntlr/CalculatorLexer';
@@ -14,7 +14,7 @@ export class Calculator {
             result.isValid = true;
             return result;
         }
-        var inputStream = new ANTLRInputStream(formula);
+        var inputStream = CharStreams.fromString(formula);
         var lexer = new CalculatorLexer(inputStream);
         var commonTokenStream = new CommonTokenStream(lexer);
         var parser = new CalculatorParser(commonTokenStream);
