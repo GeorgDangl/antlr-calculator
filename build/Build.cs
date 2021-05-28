@@ -61,7 +61,7 @@ class Build : NukeBuild
     {
         if (IsServerBuild)
         {
-            SendTeamsMessage("Build Failed", $"Target {target} failed for Dangl.Calculator, " +
+            SendTeamsMessage("Build Failed", $"Target {target} failed for antlr-calculator, " +
                         $"Branch: {GitRepository.Branch}", true);
         }
     }
