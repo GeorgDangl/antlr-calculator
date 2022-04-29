@@ -9,7 +9,7 @@ to calculate results from formulas that are passed in as string. Both JavaScript
 Whenever a calculation is performed, a `CalculationResult` is returned with the following properties:
 
 | Property      | Type    |                                                                                             |
-|---------------|---------|---------------------------------------------------------------------------------------------|
+| ------------- | ------- | ------------------------------------------------------------------------------------------- |
 | isValid       | boolean | `true` if the formula could be parsed and calculated, else `false`                          |
 | errorPosition | number  | Position of the offending symbol in the line, 0 based index, for invalid results, else null |
 | errorMessage  | string  | ANTLR error message for invalid formulas, else null                                         |
@@ -26,9 +26,8 @@ Clone this repository or just go with `npm install antlr-calculator`.
 ## JavaScript
 
 Just reference `dist/bundle.js` and the global variable `antlrCalc` is available.
- 
 
-``` javascript
+```javascript
 var result = antlrCalc.Calculator.calculate('4*5');
 console.log(JSON.stringify(result, null, 2));
 
@@ -38,14 +37,13 @@ console.log(JSON.stringify(result, null, 2));
 //    "errorMessage": null,
 //    "result": 20
 //  }
-
 ```
 
 ## TypeScript
 
 Import the `Calculator` class and use the static `calculate(formula: string)` method to evaluate formulas.
 
-``` typescript
+```typescript
 import { Calculator } from 'antlr-calculator';
 
 var result = Calculator.calculate('4*5');
@@ -61,50 +59,52 @@ console.log(JSON.stringify(result, null, 2));
 
 ## Supported functions
 
-| Expression                               |                                       |
-|------------------------------------------|---------------------------------------|
-`FLOOR  expression`                        | Round down to zero accuracy           |
-`CEIL  expression`                         | Round up to zero accuracy             |
-`ABS  expression`                          | Absolute value                        |
-`ROUNDK '(' expression ';' expression ')'` | Round expr_1 with expr_2 accuracy     |
-`ROUND  expression`                        | Round with zero accuracy              |
-`TRUNC  expression`                        | Trim decimal digits                   |
-`SIN  expression`                          | Sinus                                 |
-`COS  expression`                          | Cosinus                               |
-`TAN  expression`                          | Tangens                               |
-`COT  expression`                          | Cotangens                             |
-`SINH  expression`                         | Sinus Hypererbolicus                  |
-`COSH  expression`                         | Cosinus Hyperbolicus                  |
-`TANH  expression`                         | Tangens Hyperbolicus                  |
-`ARCSIN  expression`                       | Inverse Sinus                         |
-`ARCCOS  expression`                       | Inverse Cosinus                       |
-`ARCTAN  expression`                       | Inverse Tangens                       |
-`ARCTAN2 '(' expression ';' expression ')'`| Atan2                                 |
-`ARCCOT  expression`                       | Inverse Cotangens                     |
-`EXP  expression`                          | e ^ expr                              |
-`LN  expression`                           | Logarithm to e                        |
-`EEX  expression`                          | 10 ^ expr                             |
-`LOG  expression`                          | Logarithm to 10                       |
-`RAD  expression`                          | Angle to radians (360° base)          |
-`DEG  expression`                          | Radians to angle (360° base)          |
-`SQRT expression`                          | Square root                           |
-`SQR expression`                           | Square product                        |
-`expression op = ('^'|'**') expression`    | expr_1 to the expr_2 th power         |
-`expression (MOD | '%' ) expression`       | Modulo                                |
-`expression DIV expression`                | Whole part of division rest           |
-`expression op = ('~'|'//') expression`    | expr_1 nth root of expr_2             |
-`expression op = ('*'|'/') expression`     | Multiplication or division            |
-`expression op = ('+'|'-') expression`     | Addition or subtraction               |
-`NUMBER	`                                  | Single integer or float number        |
-`'(' expression ')'`                       | Expression within parentheses         |
-`PI '()'?`                                 | Mathematical constant pi = 3,141593   |
-`expression E+ expression`                 | Exponent, e.g. 10e+43                 |
-`expression E- expression`                 | Inverted Exponent, e.g. 10e-43        |
-`EULER`                                    | Mathematical constant e = 2,718282    |
-`'-' expression`                           | Unary minus sign (negative numbers)   |
-`'+' expression`                           | Unary plus sign (positive numbers)    |
-`'(' expression ')' expression`            | Expressions without multiplication sign, e.g. `2(3)` -> `2*(3)` |
-`expression '(' expression ')'`            | Expressions without multiplication sign, e.g. `2(3)` -> `2*(3)` |
+| Expression                                  |                                                                 |
+| ------------------------------------------- | --------------------------------------------------------------- | ----------------------------- |
+| `FLOOR expression`                          | Round down to zero accuracy                                     |
+| `CEIL expression`                           | Round up to zero accuracy                                       |
+| `ABS expression`                            | Absolute value                                                  |
+| `ROUNDK '(' expression ';' expression ')'`  | Round expr_1 with expr_2 accuracy                               |
+| `ROUND expression`                          | Round with zero accuracy                                        |
+| `TRUNC expression`                          | Trim decimal digits                                             |
+| `SIN expression`                            | Sinus                                                           |
+| `COS expression`                            | Cosinus                                                         |
+| `TAN expression`                            | Tangens                                                         |
+| `COT expression`                            | Cotangens                                                       |
+| `SINH expression`                           | Sinus Hypererbolicus                                            |
+| `COSH expression`                           | Cosinus Hyperbolicus                                            |
+| `TANH expression`                           | Tangens Hyperbolicus                                            |
+| `ARCSIN expression`                         | Inverse Sinus                                                   |
+| `ARCCOS expression`                         | Inverse Cosinus                                                 |
+| `ARCTAN expression`                         | Inverse Tangens                                                 |
+| `ARCTAN2 '(' expression ';' expression ')'` | Atan2                                                           |
+| `ARCCOT expression`                         | Inverse Cotangens                                               |
+| `EXP expression`                            | e ^ expr                                                        |
+| `LN expression`                             | Logarithm to e                                                  |
+| `EEX expression`                            | 10 ^ expr                                                       |
+| `LOG expression`                            | Logarithm to 10                                                 |
+| `RAD expression`                            | Angle to radians (360° base)                                    |
+| `DEG expression`                            | Radians to angle (360° base)                                    |
+| `SQRT expression`                           | Square root                                                     |
+| `SQR expression`                            | Square product                                                  |
+| `expression op = ('^'                       | '\*\*') expression`                                             | expr_1 to the expr_2 th power |
+| `expression (MOD                            | '%' ) expression`                                               | Modulo                        |
+| `expression DIV expression`                 | Whole part of division rest                                     |
+| `expression op = ('~'                       | '//') expression`                                               | expr_1 nth root of expr_2     |
+| `expression op = ('\*'                      | '/') expression`                                                | Multiplication or division    |
+| `expression op = ('+'                       | '-') expression`                                                | Addition or subtraction       |
+| `NUMBER `                                   | Single integer or float number                                  |
+| `'(' expression ')'`                        | Expression within parentheses                                   |
+| `MIN '(' expression (';' expression)* ')'`  | Minimum                                                         |
+| `MAX '(' expression (';' expression)* ')'`  | Maximum                                                         |
+| `PI '()'?`                                  | Mathematical constant pi = 3,141593                             |
+| `expression E+ expression`                  | Exponent, e.g. 10e+43                                           |
+| `expression E- expression`                  | Inverted Exponent, e.g. 10e-43                                  |
+| `EULER`                                     | Mathematical constant e = 2,718282                              |
+| `'-' expression`                            | Unary minus sign (negative numbers)                             |
+| `'+' expression`                            | Unary plus sign (positive numbers)                              |
+| `'(' expression ')' expression`             | Expressions without multiplication sign, e.g. `2(3)` -> `2*(3)` |
+| `expression '(' expression ')'`             | Expressions without multiplication sign, e.g. `2(3)` -> `2*(3)` |
 
 _expression_ may be any expression as functions can be nested. Example: `DEG(2*PI)` or `LOG(10^3)`.
 
@@ -127,15 +127,13 @@ The calculator can be called with an overload that accepts a callback function f
 Here, `#Z4` is a _substitution_, which is a placeholder that can be externally supplied. Let's say you want to resolve `#Z4` to the value three, you could make this simple call:
 
 ```typescript
-const formula = "1,2*#Z4+3";
-const result = Calculator.calculate(formula, substitution =>
-{
-    if (substitution === "#Z4")
-    {
-        return 3;
-    }
+const formula = '1,2*#Z4+3';
+const result = Calculator.calculate(formula, (substitution) => {
+  if (substitution === '#Z4') {
+    return 3;
+  }
 
-    return null;
+  return null;
 });
 ```
 
