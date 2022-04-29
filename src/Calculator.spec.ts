@@ -563,7 +563,29 @@ describe('Calculator',
 
                 it('UnaryPlus_01', () => { expectations = { formula: '+2', expectedResult: 2 }; });
 
-                it('UnaryPlus_02', () => { expectations = { formula: '(+2)', expectedResult: 2 }; });
+                it('Min_WithSingleArgument', () => { expectations = { formula: 'min(2)', expectedResult: 2 }; });
+
+                it('Min_WithSingleArgument_IsExpression', () => { expectations = { formula: 'min(8*7)', expectedResult: 56 }; });
+
+                it('Min_WithTwoArguments', () => { expectations = { formula: 'min(1;2)', expectedResult: 1 }; });
+
+                it('Min_WithMultiple', () => { expectations = { formula: 'min(1;2;3;4;5)', expectedResult: 1 }; });
+
+                it('Min_WithTwoArguments_OneIsExpression', () => { expectations = { formula: 'min(1*3;2)', expectedResult: 2 }; });
+
+                it('Min_WithMultiple_OneIsExpression', () => { expectations = { formula: 'min(6;2^2;7;8;5)', expectedResult: 4 }; });
+
+                it('Max_WithSingleArgument', () => { expectations = { formula: 'max(2)', expectedResult: 2 }; });
+
+                it('Max_WithSingleArgument_IsExpression', () => { expectations = { formula: 'max(8*7)', expectedResult: 56 }; });
+
+                it('Max_WithTwoArguments', () => { expectations = { formula: 'max(1;2)', expectedResult: 2 }; });
+
+                it('Max_WithMultiple', () => { expectations = { formula: 'max(1;2;3;4;5)', expectedResult: 5 }; });
+
+                it('Max_WithTwoArguments_OneIsExpression', () => { expectations = { formula: 'max(1*3;2)', expectedResult: 3 }; });
+
+                it('Max_WithMultiple_OneIsExpression', () => { expectations = { formula: 'max(1;2^2;2;3;-5)', expectedResult: 4 }; });
             });
 
         describe('with invalid formulas:',
