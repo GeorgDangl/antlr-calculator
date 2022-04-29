@@ -1,4 +1,4 @@
-import { AbsContext, SubstitutionContext } from "./GeneratedAntlr/CalculatorParser";
+import { AbsContext, MaxContext, MinContext, SubstitutionContext } from "./GeneratedAntlr/CalculatorParser";
 
 import { AbstractParseTreeVisitor } from 'antlr4ts/tree/AbstractParseTreeVisitor'
 import { AddSubContext } from "./GeneratedAntlr/CalculatorParser";
@@ -71,6 +71,34 @@ export class FormulaVisitor extends AbstractParseTreeVisitor<number> implements 
     // Visit a parse tree produced by calculatorParser#calculator.
     visitCalculator(context: CalculatorContext): number {
         return context.expression().accept(this);
+    };
+
+    visitMin(context: MinContext): number {
+        let currentMin = this.visitExpression(context._expr[0]);
+
+        if (context._expr.length > 1)
+        {
+            for (let i = 1; i < context._expr.length; i++)
+            {
+                currentMin = Math.min(currentMin, this.visitExpression(context._expr[i]));
+            }
+        }
+        
+        return currentMin;
+    };
+
+    visitMax(context: MaxContext): number {
+        let currentMax = this.visitExpression(context._expr[0]);
+
+        if (context._expr.length > 1)
+        {
+            for (let i = 1; i < context._expr.length; i++)
+            {
+                currentMax = Math.max(currentMax, this.visitExpression(context._expr[i]));
+            }
+        }
+        
+        return currentMax;
     };
 
     visitExpression(context: ExpressionContext): number {

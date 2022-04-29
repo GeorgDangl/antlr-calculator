@@ -40,6 +40,8 @@ import { SqRootContext } from "./CalculatorParser";
 import { MulDivContext } from "./CalculatorParser";
 import { ParenthesisContext } from "./CalculatorParser";
 import { MultContext } from "./CalculatorParser";
+import { MinContext } from "./CalculatorParser";
+import { MaxContext } from "./CalculatorParser";
 import { AddSubContext } from "./CalculatorParser";
 import { NumberContext } from "./CalculatorParser";
 import { PiContext } from "./CalculatorParser";
@@ -354,6 +356,22 @@ export interface CalculatorVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitMult?: (ctx: MultContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `Min`
+	 * labeled alternative in `CalculatorParser.expression`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitMin?: (ctx: MinContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `Max`
+	 * labeled alternative in `CalculatorParser.expression`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitMax?: (ctx: MaxContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by the `AddSub`

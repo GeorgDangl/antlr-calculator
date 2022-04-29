@@ -40,6 +40,8 @@ import { SqRootContext } from "./CalculatorParser";
 import { MulDivContext } from "./CalculatorParser";
 import { ParenthesisContext } from "./CalculatorParser";
 import { MultContext } from "./CalculatorParser";
+import { MinContext } from "./CalculatorParser";
+import { MaxContext } from "./CalculatorParser";
 import { AddSubContext } from "./CalculatorParser";
 import { NumberContext } from "./CalculatorParser";
 import { PiContext } from "./CalculatorParser";
@@ -536,6 +538,32 @@ export interface CalculatorListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitMult?: (ctx: MultContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `Min`
+	 * labeled alternative in `CalculatorParser.expression`.
+	 * @param ctx the parse tree
+	 */
+	enterMin?: (ctx: MinContext) => void;
+	/**
+	 * Exit a parse tree produced by the `Min`
+	 * labeled alternative in `CalculatorParser.expression`.
+	 * @param ctx the parse tree
+	 */
+	exitMin?: (ctx: MinContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `Max`
+	 * labeled alternative in `CalculatorParser.expression`.
+	 * @param ctx the parse tree
+	 */
+	enterMax?: (ctx: MaxContext) => void;
+	/**
+	 * Exit a parse tree produced by the `Max`
+	 * labeled alternative in `CalculatorParser.expression`.
+	 * @param ctx the parse tree
+	 */
+	exitMax?: (ctx: MaxContext) => void;
 
 	/**
 	 * Enter a parse tree produced by the `AddSub`
