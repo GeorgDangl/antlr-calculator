@@ -59,52 +59,52 @@ console.log(JSON.stringify(result, null, 2));
 
 ## Supported functions
 
-| Expression                                  |                                                                 |
-| ------------------------------------------- | --------------------------------------------------------------- | ----------------------------- |
-| `FLOOR expression`                          | Round down to zero accuracy                                     |
-| `CEIL expression`                           | Round up to zero accuracy                                       |
-| `ABS expression`                            | Absolute value                                                  |
-| `ROUNDK '(' expression ';' expression ')'`  | Round expr_1 with expr_2 accuracy                               |
-| `ROUND expression`                          | Round with zero accuracy                                        |
-| `TRUNC expression`                          | Trim decimal digits                                             |
-| `SIN expression`                            | Sinus                                                           |
-| `COS expression`                            | Cosinus                                                         |
-| `TAN expression`                            | Tangens                                                         |
-| `COT expression`                            | Cotangens                                                       |
-| `SINH expression`                           | Sinus Hypererbolicus                                            |
-| `COSH expression`                           | Cosinus Hyperbolicus                                            |
-| `TANH expression`                           | Tangens Hyperbolicus                                            |
-| `ARCSIN expression`                         | Inverse Sinus                                                   |
-| `ARCCOS expression`                         | Inverse Cosinus                                                 |
-| `ARCTAN expression`                         | Inverse Tangens                                                 |
-| `ARCTAN2 '(' expression ';' expression ')'` | Atan2                                                           |
-| `ARCCOT expression`                         | Inverse Cotangens                                               |
-| `EXP expression`                            | e ^ expr                                                        |
-| `LN expression`                             | Logarithm to e                                                  |
-| `EEX expression`                            | 10 ^ expr                                                       |
-| `LOG expression`                            | Logarithm to 10                                                 |
-| `RAD expression`                            | Angle to radians (360° base)                                    |
-| `DEG expression`                            | Radians to angle (360° base)                                    |
-| `SQRT expression`                           | Square root                                                     |
-| `SQR expression`                            | Square product                                                  |
-| `expression op = ('^'                       | '\*\*') expression`                                             | expr_1 to the expr_2 th power |
-| `expression (MOD                            | '%' ) expression`                                               | Modulo                        |
-| `expression DIV expression`                 | Whole part of division rest                                     |
-| `expression op = ('~'                       | '//') expression`                                               | expr_1 nth root of expr_2     |
-| `expression op = ('\*'                      | '/') expression`                                                | Multiplication or division    |
-| `expression op = ('+'                       | '-') expression`                                                | Addition or subtraction       |
-| `NUMBER `                                   | Single integer or float number                                  |
-| `'(' expression ')'`                        | Expression within parentheses                                   |
-| `MIN '(' expression (';' expression)* ')'`  | Minimum                                                         |
-| `MAX '(' expression (';' expression)* ')'`  | Maximum                                                         |
-| `PI '()'?`                                  | Mathematical constant pi = 3,141593                             |
-| `expression E+ expression`                  | Exponent, e.g. 10e+43                                           |
-| `expression E- expression`                  | Inverted Exponent, e.g. 10e-43                                  |
-| `EULER`                                     | Mathematical constant e = 2,718282                              |
-| `'-' expression`                            | Unary minus sign (negative numbers)                             |
-| `'+' expression`                            | Unary plus sign (positive numbers)                              |
-| `'(' expression ')' expression`             | Expressions without multiplication sign, e.g. `2(3)` -> `2*(3)` |
-| `expression '(' expression ')'`             | Expressions without multiplication sign, e.g. `2(3)` -> `2*(3)` |
+| Expression                                   |                                                                 |
+| -------------------------------------------- | --------------------------------------------------------------- |
+| `FLOOR expression`                           | Round down to zero accuracy                                     |
+| `CEIL expression`                            | Round up to zero accuracy                                       |
+| `ABS expression`                             | Absolute value                                                  |
+| `ROUNDK '(' expression ';' expression ')'`   | Round expr_1 with expr_2 accuracy                               |
+| `ROUND expression`                           | Round with zero accuracy                                        |
+| `TRUNC expression`                           | Trim decimal digits                                             |
+| `SIN expression`                             | Sinus                                                           |
+| `COS expression`                             | Cosinus                                                         |
+| `TAN expression`                             | Tangens                                                         |
+| `COT expression`                             | Cotangens                                                       |
+| `SINH expression`                            | Sinus Hypererbolicus                                            |
+| `COSH expression`                            | Cosinus Hyperbolicus                                            |
+| `TANH expression`                            | Tangens Hyperbolicus                                            |
+| `ARCSIN expression`                          | Inverse Sinus                                                   |
+| `ARCCOS expression`                          | Inverse Cosinus                                                 |
+| `ARCTAN expression`                          | Inverse Tangens                                                 |
+| `ARCTAN2 '(' expression ';' expression ')'`  | Atan2                                                           |
+| `ARCCOT expression`                          | Inverse Cotangens                                               |
+| `EXP expression`                             | e ^ expr                                                        |
+| `LN expression`                              | Logarithm to e                                                  |
+| `EEX expression`                             | 10 ^ expr                                                       |
+| `LOG expression`                             | Logarithm to 10                                                 |
+| `RAD expression`                             | Angle to radians (360° base)                                    |
+| `DEG expression`                             | Radians to angle (360° base)                                    |
+| `SQRT expression`                            | Square root                                                     |
+| `SQR expression`                             | Square product                                                  |
+| `expression op = ('^' \| '\*\*') expression` | expr_1 to the expr_2 th power                                   |
+| `expression (MOD \| '%' ) expression`        | Modulo                                                          |
+| `expression DIV expression`                  | Whole part of division rest                                     |
+| `expression op = ('~' \| '//') expression`   | expr_1 nth root of expr_2                                       |
+| `expression op = ('\*' \| '/') expression`   | Multiplication or division                                      |
+| `expression op = ('+' \| '-') expression`    | Addition or subtraction                                         |
+| `NUMBER`                                     | Single integer or float number                                  |
+| `'(' expression ')'`                         | Expression within parentheses                                   |
+| `MIN '(' expression (';' expression)* ')'`   | Minimum                                                         |
+| `MAX '(' expression (';' expression)* ')'`   | Maximum                                                         |
+| `PI '()'?`                                   | Mathematical constant pi = 3,141593                             |
+| `expression E+ expression`                   | Exponent, e.g. 10e+43                                           |
+| `expression E- expression`                   | Inverted Exponent, e.g. 10e-43                                  |
+| `EULER`                                      | Mathematical constant e = 2,718282                              |
+| `'-' expression`                             | Unary minus sign (negative numbers)                             |
+| `'+' expression`                             | Unary plus sign (positive numbers)                              |
+| `'(' expression ')' expression`              | Expressions without multiplication sign, e.g. `2(3)` -> `2*(3)` |
+| `expression '(' expression ')'`              | Expressions without multiplication sign, e.g. `2(3)` -> `2*(3)` |
 
 _expression_ may be any expression as functions can be nested. Example: `DEG(2*PI)` or `LOG(10^3)`.
 
