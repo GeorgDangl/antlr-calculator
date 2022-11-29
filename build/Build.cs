@@ -117,7 +117,7 @@ class Build : NukeBuild
             ? "latest"
             : "next";
 
-            Npm($"publish --tag={npmTag}", distDirectory);
+            Npm($"publish --tag={npmTag} --openssl-legacy-provider", distDirectory);
 
             if (npmTag == "latest")
             {
