@@ -11,6 +11,7 @@ pipeline {
         KeyVaultBaseUrl = credentials('AzureCiKeyVaultBaseUrl')
         KeyVaultClientId = credentials('AzureCiKeyVaultClientId')
         KeyVaultClientSecret = credentials('AzureCiKeyVaultClientSecret')
+        NODE_OPTIONS = '--openssl-legacy-provider'
     }
     stages {
         stage ('Test') {
