@@ -10,7 +10,7 @@
   },
   "scripts": {
     "build": "tsc && npm run webpack",
-    "webpack": "webpack --mode production",
+    "webpack": "webpack --mode production --openssl-legacy-provider",
     "tsc": "tsc",
     "test": "karma start karma.conf.js",
     "test:ci": "karma start karma.conf.ci.js",
