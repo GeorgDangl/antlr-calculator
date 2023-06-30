@@ -786,6 +786,119 @@ describe('Calculator',
             });
         });
 
+        describe('with ranges', () => {
+
+            it('ErrorWhenRangeCanNotBeResolved_NoneGiven', () => {
+                const formula = "1+#1..#2";
+                const result = Calculator.calculate(formula);
+
+                expect(result.isValid).toBeFalse();
+                expect(result.result).toBeNaN();
+                expect(result.errorPosition).toBe(2);
+                expect(result.errorMessage).toContain('#1..#2');
+            });
+
+            it('ErrorWhenRangeCanNotBeResolved_ReturnsNull', () => {
+                const formula = "1+#1..#2";
+                const result = Calculator.calculate(formula, null, _ => null);
+
+                console.log(result);
+
+                expect(result.isValid).toBeFalse();
+                expect(result.result).toBeNaN();
+                expect(result.errorPosition).toBe(2);
+                expect(result.errorMessage).toContain('#1..#2');
+            });
+
+            it('CanCalculateRange', () => {
+                const formula = "1+#A..#Z";
+                const result = Calculator.calculate(formula, null, _ => 3);
+
+                expect(result.isValid).toBeTrue();
+                expect(result.result).toBe(4);
+            });
+
+            it('CanCalculateRange_02', () => {
+                const formula = "1+#Z4..#Z8+4";
+                const result = Calculator.calculate(formula, null, _ => 3);
+
+                expect(result.isValid).toBeTrue();
+                expect(result.result).toBe(8);
+            });
+
+            it('CanCalculateMultipleRanges', () => {
+                const formula = "#a..#b + #c..#d * #e..#f";
+                const result = Calculator.calculate(formula, null, _ => 3);
+
+                expect(result.isValid).toBeTrue();
+                expect(result.result).toBe(12);
+            });
+
+            it('CanSubstituteCustomValues', () => {
+                const formula = "#a..#b + #c..#d * #e..#f";
+                const result = Calculator.calculate(formula, null, range => {
+                    if (range.start === '#a' && range.end === '#b') {
+                        return 2;
+                    }
+                    
+                    if (range.start === '#c' && range.end === '#d') {
+                        return 3;
+                    }
+                    
+                    if (range.start === '#e' && range.end === '#f') {
+                        return 4;
+                    }
+                    
+                    throw new Error();
+                });
+
+                expect(result.isValid).toBeTrue();
+                expect(result.result).toBe(14);
+            });
+
+            it('CanSubstituteRangeInComplex', () => {
+                const formula = "log10*pi/#12d..#14g*e";
+                const result = Calculator.calculate(formula, null, _ => 3);
+
+                expect(result.isValid).toBeTrue();
+                expect(result.result).toBeCloseTo(2.846578, 5);
+            });
+
+            it('ReportsCorrectRange', () => {
+                const formula = "1+2+#3..#B+4";
+                let reportedStart = '';
+                let reportedEnd = '';
+                const result = Calculator.calculate(formula, null, range => {
+                    reportedStart = range.start;
+                    reportedEnd = range.end;
+                    return null;
+                });
+                expect(reportedStart).toBe("#3");
+                expect(reportedEnd).toBe("#B");
+            });
+
+            it('IgnoresRangeLikeInComment_DoubleQuotes', () => {
+                const formula = "1+2+\"#3..#4+\"4";
+                const actual = Calculator.calculate(formula);
+                expect(actual.result).toBe(7);
+                expect(actual.isValid).toBeTrue();
+            });
+
+            it('IgnoresRangeLikeInComment_SingleQuotes', () => {
+                const formula = "1+2+'#3..#4+'4";
+                const actual = Calculator.calculate(formula);
+                expect(actual.result).toBe(7);
+                expect(actual.isValid).toBeTrue();
+            });
+
+            it('IgnoresRangeLikeInComment_CStyle', () => {
+                const formula = "1+2+/*#3..#4+*/4";
+                const actual = Calculator.calculate(formula);
+                expect(actual.result).toBe(7);
+                expect(actual.isValid).toBeTrue();
+            });
+        });
+
         describe('with trailing comments after semicolon', () => {
             var expectations: { formula: string, expectedResult: number | null, shouldBeSuccess: boolean; };
 

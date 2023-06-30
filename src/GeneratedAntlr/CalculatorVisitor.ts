@@ -46,6 +46,7 @@ import { AddSubContext } from "./CalculatorParser";
 import { NumberContext } from "./CalculatorParser";
 import { PiContext } from "./CalculatorParser";
 import { EulerContext } from "./CalculatorParser";
+import { RangeContext } from "./CalculatorParser";
 import { SubstitutionContext } from "./CalculatorParser";
 import { CalculatorContext } from "./CalculatorParser";
 import { ExpressionContext } from "./CalculatorParser";
@@ -404,6 +405,14 @@ export interface CalculatorVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitEuler?: (ctx: EulerContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `Range`
+	 * labeled alternative in `CalculatorParser.expression`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitRange?: (ctx: RangeContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by the `Substitution`

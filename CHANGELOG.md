@@ -2,6 +2,9 @@
 
 All notable changes to **antlr-calculator** are documented here.
 
+## v2.3.0:
+- Added support for ranges, e.g. `#START..#END` to implement custom sum logic
+
 ## v2.2.0:
 - Added support for `Min` and `Max` formulas
 

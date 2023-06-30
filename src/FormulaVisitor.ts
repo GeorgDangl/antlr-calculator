@@ -1,4 +1,4 @@
-import { AbsContext, MaxContext, MinContext, SubstitutionContext } from "./GeneratedAntlr/CalculatorParser";
+import { AbsContext, MaxContext, MinContext, RangeContext, SubstitutionContext } from "./GeneratedAntlr/CalculatorParser";
 
 import { AbstractParseTreeVisitor } from 'antlr4ts/tree/AbstractParseTreeVisitor'
 import { AddSubContext } from "./GeneratedAntlr/CalculatorParser";
@@ -53,6 +53,7 @@ export class FormulaVisitor extends AbstractParseTreeVisitor<number> implements 
     }
 
     constructor(private substitutionResolver: (substitution: string) => number,
+    private rangeResolver: (range: { start: string; end: string }) => number,
         private formulaErrorListener: FormulaErrorListener) {
         super();
     }
@@ -65,6 +66,16 @@ export class FormulaVisitor extends AbstractParseTreeVisitor<number> implements 
         }
 
         this.formulaErrorListener.reportSubstitutionNotFound(context.start.tokenIndex, substitution);
+        return 0;
+    }
+
+    visitRange(context: RangeContext): number {
+        const resolved = this.rangeResolver({start: context.start.text, end:context._end.text});
+        if (resolved != null) {
+            return resolved;
+        }
+
+        this.formulaErrorListener.reportRangeNotFound(context.start.tokenIndex, context.text);
         return 0;
     }
 
