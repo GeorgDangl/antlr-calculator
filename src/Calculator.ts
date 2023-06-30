@@ -30,10 +30,14 @@ export class Calculator {
     }
 
     if (!rangeResolver) {
-        rangeResolver = (_) => null;
+      rangeResolver = (_) => null;
     }
 
-    var visitor = new FormulaVisitor(substitutionResolver, rangeResolver, errorListener);
+    var visitor = new FormulaVisitor(
+      substitutionResolver,
+      rangeResolver,
+      errorListener
+    );
     var parseTree = parser.calculator();
     var visitorResult = visitor.visitCalculator(parseTree);
     if (errorListener.isValid) {
