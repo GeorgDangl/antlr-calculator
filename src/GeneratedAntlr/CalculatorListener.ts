@@ -46,6 +46,7 @@ import { AddSubContext } from "./CalculatorParser";
 import { NumberContext } from "./CalculatorParser";
 import { PiContext } from "./CalculatorParser";
 import { EulerContext } from "./CalculatorParser";
+import { RangeContext } from "./CalculatorParser";
 import { SubstitutionContext } from "./CalculatorParser";
 import { CalculatorContext } from "./CalculatorParser";
 import { ExpressionContext } from "./CalculatorParser";
@@ -616,6 +617,19 @@ export interface CalculatorListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitEuler?: (ctx: EulerContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `Range`
+	 * labeled alternative in `CalculatorParser.expression`.
+	 * @param ctx the parse tree
+	 */
+	enterRange?: (ctx: RangeContext) => void;
+	/**
+	 * Exit a parse tree produced by the `Range`
+	 * labeled alternative in `CalculatorParser.expression`.
+	 * @param ctx the parse tree
+	 */
+	exitRange?: (ctx: RangeContext) => void;
 
 	/**
 	 * Enter a parse tree produced by the `Substitution`
