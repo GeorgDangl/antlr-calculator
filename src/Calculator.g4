@@ -1,16 +1,3 @@
-// **************************************
-// *                                    *
-// *  Grammar for calculating           *
-// *  formulas.                         *
-// *  (c) 2015 Georg Dangl              *
-// *  info@georgdangl.de                *
-// *                                    *
-// **************************************    
-// *                                    *
-// *  Grammar written for ANTLR4        *
-// *  www.antlr.org                     *
-// **************************************
-    
 grammar Calculator;
 
 /*
