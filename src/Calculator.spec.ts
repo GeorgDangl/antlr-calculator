@@ -404,6 +404,34 @@ describe('Calculator', () => {
       expectations = { formula: '(1)', expectedResult: 1 };
     });
 
+    it('Parentheses_Round', () => {
+      expectations = { formula: '(3-2)*5', expectedResult: 5 };
+    });
+
+    it('Parentheses_Round_WithoutParentheses', () => {
+      expectations = { formula: '3-2*5', expectedResult: -7 };
+    });
+
+    it('Parentheses_Square', () => {
+      expectations = { formula: '[3-2]*5', expectedResult: 5 };
+    });
+
+    it('Parentheses_Square_WithoutParentheses', () => {
+      expectations = { formula: '3-2*5', expectedResult: -7 };
+    });
+
+    it('Parentheses_Curly', () => {
+      expectations = { formula: '{3-2}*5', expectedResult: 5 };
+    });
+
+    it('Parentheses_Curly_WithoutParentheses', () => {
+      expectations = { formula: '3-2*5', expectedResult: -7 };
+    });
+
+    it('CanMixParentheses', () => {
+      expectations = { formula: '(2+4)*[5-3]', expectedResult: 12 };
+    });
+
     it('Calc_SingleNine', () => {
       expectations = { formula: '9', expectedResult: 9 };
     });
@@ -873,6 +901,48 @@ describe('Calculator', () => {
         formula: '1+1d',
         expectedErrorPosition: 3
       };
+    });
+
+    it('Parentheses_Round_ClosedWithSquare', () => {
+      expectations = { formula: '(3-2]*5', expectedErrorPosition: 4 };
+    });
+
+    it('Parentheses_Square_ClosedWithRound', () => {
+      expectations = { formula: '[3-2)*5', expectedErrorPosition: 4 };
+    });
+
+    it('Parentheses_Curly_ClosedWithRound', () => {
+      expectations = { formula: '{3-2)*5', expectedErrorPosition: 4 };
+    });
+
+    it('Parentheses_InvalidOrder (', () => {
+      expectations = { formula: '(', expectedErrorPosition: 1 };
+    });
+
+    it('Parentheses_InvalidOrder (1+()', () => {
+      expectations = { formula: '(1+()', expectedErrorPosition: 3 };
+    });
+
+    it('Parentheses_InvalidOrder (1+(2)', () => {
+      expectations = { formula: '(1+(2)', expectedErrorPosition: 6 };
+    });
+
+    it('Parentheses_MixedTypes_01', () => {
+      expectations = { formula: '(1+3-[4*5)]', expectedErrorPosition: 9 };
+    });
+
+    it('Parentheses_MixedTypes_02', () => {
+      expectations = { formula: '(1+3-[4*5)]', expectedErrorPosition: 9 };
+    });
+
+    it('Parentheses_MultiplicationImplicitWithSquare', () => {
+      // We support implicit multiplication only with default, round parentheses
+      expectations = { formula: '[3-2]5', expectedErrorPosition: 5 };
+    });
+
+    it('Parentheses_MultiplicationImplicitWithCurly', () => {
+      // We support implicit multiplication only with default, round parentheses
+      expectations = { formula: '{3-2}5', expectedErrorPosition: 5 };
     });
   });
 

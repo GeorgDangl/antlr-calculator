@@ -1,16 +1,3 @@
-// **************************************
-// *                                    *
-// *  Grammar for calculating           *
-// *  formulas.                         *
-// *  (c) 2015 Georg Dangl              *
-// *  info@georgdangl.de                *
-// *                                    *
-// **************************************    
-// *                                    *
-// *  Grammar written for ANTLR4        *
-// *  www.antlr.org                     *
-// **************************************
-    
 grammar Calculator;
 
 /*
@@ -58,6 +45,8 @@ expression:
 	| expression op = ('~' | '//') expression					# SqRoot // expr_1 nth root of expr_2
 	| expression op = ('*' | '/') expression					# MulDiv // Multiplication or division
 	| '(' expression ')'										# Parenthesis // Expression within parentheses
+	| '[' expression ']'										# Parenthesis // Expression within parentheses
+	| '{' expression '}'										# Parenthesis // Expression within parentheses
 	| expression '(' expression ')'								# Mult // Multiplication without sign
 	| '(' expression ')' expression								# Mult // Multiplication without sign
 	| MIN '(' expr += expression (';' expr += expression)* ')'	# Min // Minimum
@@ -66,7 +55,7 @@ expression:
 	| NUMBER													# Number // Single integer or float number
 	| PI '()'?													# Pi // Mathematical constant pi = 3,141593
 	| EULER														# Euler // Mathematical constant e = 2,718282
-    | start=SUBSTITUTION '..' end=SUBSTITUTION                  # Range
+	| start = SUBSTITUTION '..' end = SUBSTITUTION				# Range
 	| SUBSTITUTION												# Substitution;
 
 // End of file
