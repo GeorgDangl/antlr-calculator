@@ -32,9 +32,7 @@ module.exports = {
   optimization: {
     minimizer: [
       new TerserPlugin({
-        cache: true,
-        parallel: true,
-        sourceMap: true
+        parallel: true
       }),
     ],
   },
