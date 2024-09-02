@@ -3,7 +3,7 @@
     "target": "ES2015",
     "module": "ES2020",
     "declaration": true,
-    "outDir": "./demo/dist",
+    "outDir": "./demo/dist/files",
     "noImplicitAny": false,
     "lib": ["es2015", "es2015.core", "DOM"],
     "types": [

@@ -9,7 +9,7 @@
     "url": "https://github.com/GeorgDangl/antlr-calculator.git"
   },
   "scripts": {
-    "build": "npm run webpack",
+    "build": "tsc && npm run webpack",
     "webpack": "webpack --mode production",
     "tsc": "tsc",
     "test": "karma start karma.conf.js",
