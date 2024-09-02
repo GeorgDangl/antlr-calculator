@@ -7,7 +7,7 @@ module.exports = {
     'antlrCalc': './src/index.ts'
   },
   output: {
-    path: path.resolve(__dirname, 'demo', 'dist'),
+    path: path.resolve(__dirname, 'demo', 'dist', 'bundles'),
     filename: '[name].js',
     libraryTarget: 'umd',
     library: 'antlrCalc',
