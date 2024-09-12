@@ -107,6 +107,7 @@ class Build : NukeBuild
             Npm("ci", RootDirectory);
             Npm("run build", RootDirectory);
             var distDirectory = RootDirectory / "dist";
+            CopyDirectoryRecursively(RootDirectory / "demo" / "dist", distDirectory);
             CopyFile(RootDirectory / "README.md", distDirectory / "README.md");
             CopyFile(RootDirectory / "LICENSE.md", distDirectory / "LICENSE.md");
             CopyFile(RootDirectory / "CHANGELOG.md", distDirectory / "CHANGELOG.md");
