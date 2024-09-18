@@ -3,23 +3,19 @@
 
 module.exports = function (config) {
     config.set({
-        frameworks: ["jasmine", "karma-typescript"],
-        files: [
-            "src/**/*.ts"
-        ],
+        frameworks: ['jasmine', 'webpack'],
+        files: ['src/**/*.spec.ts'],
         preprocessors: {
-            "**/*.ts": "karma-typescript"
+          'src/**/*.spec.ts': ['webpack'],
         },
         reporters: ['junit'],
-        browsers: ["Chrome"],
-        karmaTypescriptConfig: {
-            tsconfig: "tsconfig.spec.json"
-        },
+        browsers: ['ChromeHeadless'],
         singleRun: true,
+        webpack: require('./webpack-test.config.js'),
         junitReporter: {
           outputDir: '',
           outputFile: 'karma-results.xml',
           useBrowserName: false
-        }
-    });
+        },
+      });
 };
