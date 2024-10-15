@@ -139,7 +139,6 @@ class Build : NukeBuild
         {
             Npm("ci", RootDirectory);
             Npm("run build", RootDirectory);
-            CopyDirectoryRecursively(RootDirectory / "dist", RootDirectory / "demo" / "dist");
             WriteAllText(RootDirectory / "demo" / "index.html", ReadAllText(RootDirectory / "demo" / "index.html")
                 .Replace("@@APP_VERSION@@", GitVersion.NuGetVersion));
 
